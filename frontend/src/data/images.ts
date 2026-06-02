@@ -1,9 +1,11 @@
 import profilePhoto from '../assets/photo.jpeg'
+import bjpLogo from '../assets/bjplogo.jpeg'
 
 /** Central image URLs — replace with your own photos in production */
 export const images = {
   profile: profilePhoto,
   profileAlt: profilePhoto,
+  logo: bjpLogo,
 
   heroBanner: 'https://images.unsplash.com/photo-1529107386315-e1a2af472a2e?w=1920&fit=crop',
   aboutBanner: 'https://images.unsplash.com/photo-1577495508048-b7d87b67b231?w=1920&fit=crop',

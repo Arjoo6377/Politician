@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { Icon } from '../ui/Icon'
-import { ProfileImage } from '../ui/ProfileImage'
+import { images } from '../../data/images'
 import { mainNavLinks, mediaDropdown, profile } from '../../data/staticContent'
 
 const linkClass = (isActive: boolean) =>
@@ -43,7 +43,11 @@ export function Header() {
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="flex items-center gap-3">
-            <ProfileImage size="sm" className="ring-2 ring-orange-200" />
+            <img
+              src={images.logo}
+              alt="BJP logo"
+              className="w-10 h-10 rounded-full object-cover ring-2 ring-orange-200"
+            />
             <div className="hidden sm:block">
               <p className="font-bold text-gray-900 text-sm leading-tight">{profile.name}</p>
               <p className="text-xs text-orange-600">{profile.designation}</p>
