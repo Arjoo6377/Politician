@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { Icon, type IconName } from '../components/ui/Icon'
+import { Icon } from '../components/ui/Icon'
 import { PageHero } from '../components/ui/PageHero'
 import { images } from '../data/images'
 import { videos } from '../data/staticContent'
@@ -8,12 +8,6 @@ const categoryLabels: Record<string, string> = {
   'tv-debate': 'TV Debates',
   interview: 'Interviews',
   'public-speech': 'Public Speeches',
-}
-
-const categoryIcons: Record<string, IconName> = {
-  'tv-debate': 'tv',
-  interview: 'mic',
-  'public-speech': 'megaphone',
 }
 
 export function VideosPage() {
@@ -95,10 +89,12 @@ export function VideosPage() {
                         : 'hover:-translate-y-1 hover:shadow-xl'
                     }`}
                   >
-                    <img
-                      src={video.thumbnail}
-                      alt={video.title}
-                      className="w-full h-full object-cover"
+                    <iframe
+                      src={getEmbedUrl(video.sourceUrl)}
+                      title={`${video.title} preview`}
+                      className="w-full h-full pointer-events-none"
+                      loading="lazy"
+                      allow="encrypted-media; picture-in-picture; web-share"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/15 to-black/10" />
                     <div className="absolute inset-0 flex items-center justify-center">
