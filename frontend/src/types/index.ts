@@ -24,7 +24,7 @@ export interface Article {
 export interface GalleryAlbum {
   id: string
   title: string
-  category: 'event' | 'public-meeting' | 'media' | 'campaign'
+  category: 'media-interactions' | 'political-events' | 'public-engagement' | 'leadership-moments'
   description: string
   date: string
   coverImage: string
@@ -41,6 +41,6 @@ export interface VideoItem {
   id: string
   title: string
   youtubeId: string
-  category: 'speech' | 'interview' | 'press' | 'campaign'
+  category: 'tv-debate' | 'interview' | 'public-speech'
   date: string
 }

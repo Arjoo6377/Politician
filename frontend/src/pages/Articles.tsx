@@ -1,24 +1,14 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Calendar, FileText, Tag } from 'lucide-react'
 import { PageHero } from '../components/ui/PageHero'
-import { api } from '../api/client'
 import { Card } from '../components/ui/Card'
 import { SectionHeading } from '../components/ui/SectionHeading'
 import { getArticleImage, images } from '../data/images'
-import type { Article } from '../types'
+import { articles } from '../data/staticData'
 
 export function ArticlesPage() {
-  const [articles, setArticles] = useState<Article[]>([])
   const [filter, setFilter] = useState<string>('all')
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    api.getArticles()
-      .then(setArticles)
-      .catch(() => setArticles([]))
-      .finally(() => setLoading(false))
-  }, [])
 
   const categories = ['all', ...new Set(articles.map((a) => a.category))]
   const filtered = filter === 'all' ? articles : articles.filter((a) => a.category === filter)
@@ -26,8 +16,8 @@ export function ArticlesPage() {
   return (
     <>
       <PageHero
-        title="Articles & Blog"
-        subtitle="Opinions, updates, and in-depth articles on public service and governance"
+        title="Articles & Blogs"
+        subtitle="Thought leadership articles, opinion pieces, and insights on governance and public affairs"
         image={images.articlesBanner}
       />
 
@@ -49,9 +39,7 @@ export function ArticlesPage() {
             </div>
           )}
 
-          {loading ? (
-            <p className="text-center text-gray-500">Loading articles...</p>
-          ) : filtered.length === 0 ? (
+          {filtered.length === 0 ? (
             <div className="text-center py-16">
               <FileText size={48} className="mx-auto text-gray-300 mb-4" />
               <p className="text-gray-500">No articles published yet.</p>

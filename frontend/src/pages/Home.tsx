@@ -1,33 +1,33 @@
-import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowRight, Megaphone, Newspaper, Users } from 'lucide-react'
-import { FacebookIcon, InstagramIcon, YoutubeIcon } from '../components/ui/SocialIcons'
+import { ArrowRight, Megaphone, Newspaper, Play, Video } from 'lucide-react'
+import { InstagramIcon } from '../components/ui/SocialIcons'
 import { ProfileImage } from '../components/ui/ProfileImage'
-import { api } from '../api/client'
 import { Button } from '../components/ui/Button'
 import { Card } from '../components/ui/Card'
 import { SectionHeading } from '../components/ui/SectionHeading'
 import { getNewsImage, images } from '../data/images'
-import { homeHighlights, profile } from '../data/staticContent'
-import type { NewsItem } from '../types'
+import { newsItems } from '../data/staticData'
+import { featuredVideos, keyHighlights, profile } from '../data/staticContent'
 
 const quickNavItems = [
-  { label: 'Public Work', path: '/public-work', icon: Users, image: images.quickNav.publicWork },
+  { label: 'Video Gallery', path: '/videos', icon: Video, image: images.quickNav.gallery },
+  { label: 'Photo Gallery', path: '/gallery', icon: Megaphone, image: images.quickNav.publicWork },
   { label: 'Media Coverage', path: '/media', icon: Newspaper, image: images.quickNav.media },
-  { label: 'Photo Gallery', path: '/gallery', icon: Megaphone, image: images.quickNav.gallery },
-  { label: 'Latest News', path: '/news', icon: Megaphone, image: images.quickNav.news },
+  { label: 'Announcements', path: '/news', icon: Megaphone, image: images.quickNav.news },
 ]
 
-export function Home() {
-  const [news, setNews] = useState<NewsItem[]>([])
-  const [loading, setLoading] = useState(true)
+const videoCategoryLabels: Record<string, string> = {
+  'tv-debate': 'TV Debates',
+  interview: 'Interviews',
+  'public-speech': 'Public Speeches',
+}
 
-  useEffect(() => {
-    api.getNews()
-      .then((data) => setNews(data.slice(0, 3)))
-      .catch(() => setNews([]))
-      .finally(() => setLoading(false))
-  }, [])
+const latestNews = newsItems.slice(0, 3)
+
+export function Home() {
+  const socialLinks = [
+    { icon: InstagramIcon, href: profile.social.instagram, label: 'Instagram', handle: '@rajeevjaitly' },
+  ].filter((s) => s.href)
 
   return (
     <>
@@ -87,35 +87,62 @@ export function Home() {
 
       <section className="py-8 md:py-10">
         <div className="max-w-7xl mx-auto px-4">
-          <SectionHeading compact title="Highlighted Public Work" subtitle="Key development initiatives and community programs" />
-          <div className="grid md:grid-cols-3 gap-6">
-            {homeHighlights.map((item) => (
+          <SectionHeading compact title="Key Highlights" subtitle="Leadership, communication, and nation-building" />
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {keyHighlights.map((item) => (
               <Card key={item.title} className="!p-0 overflow-hidden">
-                <img src={item.image} alt={item.title} className="w-full h-48 object-cover" />
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">{item.title}</h3>
-                  <p className="text-gray-600">{item.description}</p>
+                <img src={item.image} alt={item.title} className="w-full h-40 object-cover" />
+                <div className="p-5">
+                  <h3 className="text-lg font-bold text-gray-900 mb-2">{item.title}</h3>
+                  <p className="text-gray-600 text-sm">{item.description}</p>
                 </div>
               </Card>
             ))}
           </div>
-          <div className="text-center mt-6">
-            <Button to="/public-work">View All Initiatives</Button>
-          </div>
+        </div>
+      </section>
 
+      <section className="py-8 md:py-10 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4">
+          <SectionHeading compact title="Video Gallery" subtitle="Latest debates, interviews & speeches" />
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {featuredVideos.map((video) => (
+              <Link key={video.id} to="/videos" className="group">
+                <Card className="!p-0 overflow-hidden hover:shadow-lg transition-shadow">
+                  <div className="aspect-video bg-gray-900 relative overflow-hidden">
+                    <img
+                      src={`https://img.youtube.com/vi/${video.youtubeId}/mqdefault.jpg`}
+                      alt={video.title}
+                      className="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-300"
+                    />
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="w-12 h-12 bg-orange-600 rounded-full flex items-center justify-center">
+                        <Play size={20} className="text-white ml-0.5" fill="white" />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="p-4">
+                    <span className="text-xs font-semibold text-orange-600">{videoCategoryLabels[video.category]}</span>
+                    <h3 className="font-bold text-gray-900 mt-1 line-clamp-2">{video.title}</h3>
+                  </div>
+                </Card>
+              </Link>
+            ))}
+          </div>
+          <div className="text-center mt-6">
+            <Button to="/videos" variant="outline">View All Videos</Button>
+          </div>
         </div>
       </section>
 
       <section className="pt-4 pb-10 md:pt-6 md:pb-12 bg-white">
         <div className="max-w-7xl mx-auto px-4">
-          <SectionHeading compact title="Latest Announcements" subtitle="Stay updated with recent news and public messages" />
-          {loading ? (
-            <p className="text-center text-gray-500">Loading announcements...</p>
-          ) : news.length === 0 ? (
+          <SectionHeading compact title="Announcements" subtitle="Latest updates, official statements, and important notices" />
+          {latestNews.length === 0 ? (
             <p className="text-center text-gray-500">No announcements yet. Check back soon.</p>
           ) : (
             <div className="grid md:grid-cols-3 gap-6">
-              {news.map((item) => (
+              {latestNews.map((item) => (
                 <Card key={item.id} className="!p-0 overflow-hidden">
                   <img
                     src={getNewsImage(item.category, item.image)}
@@ -138,7 +165,7 @@ export function Home() {
             </div>
           )}
           <div className="text-center mt-6">
-            <Button to="/news" variant="outline">All News & Announcements</Button>
+            <Button to="/news" variant="outline">All Announcements</Button>
           </div>
         </div>
       </section>
@@ -152,11 +179,7 @@ export function Home() {
             subtitle="Follow on social media for daily updates and public messages"
           />
           <div className="flex justify-center gap-4">
-            {[
-              { icon: FacebookIcon, href: profile.social.facebook, label: 'Facebook' },
-              { icon: InstagramIcon, href: profile.social.instagram, label: 'Instagram' },
-              { icon: YoutubeIcon, href: profile.social.youtube, label: 'YouTube' },
-            ].map((social) => (
+            {socialLinks.map((social) => (
               <a
                 key={social.label}
                 href={social.href}
@@ -166,6 +189,9 @@ export function Home() {
               >
                 <social.icon size={24} />
                 <span className="text-sm font-medium">{social.label}</span>
+                {'handle' in social && social.handle && (
+                  <span className="text-xs text-orange-100">{social.handle}</span>
+                )}
               </a>
             ))}
           </div>

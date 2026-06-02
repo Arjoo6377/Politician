@@ -1,19 +1,12 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { ArrowLeft, X } from 'lucide-react'
-import { api } from '../api/client'
-import type { GalleryAlbum } from '../types'
+import { getGalleryAlbum } from '../data/staticData'
 
 export function GalleryDetail() {
   const { id } = useParams()
-  const [album, setAlbum] = useState<GalleryAlbum | null>(null)
+  const album = id ? getGalleryAlbum(id) : undefined
   const [lightbox, setLightbox] = useState<number | null>(null)
-
-  useEffect(() => {
-    if (id) {
-      api.getGalleryAlbum(id).then(setAlbum).catch(() => setAlbum(null))
-    }
-  }, [id])
 
   if (!album) {
     return (

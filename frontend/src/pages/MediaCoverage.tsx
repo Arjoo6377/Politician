@@ -18,7 +18,7 @@ export function MediaCoveragePage() {
     <>
       <PageHero
         title="Media Coverage"
-        subtitle="News coverage, TV debates, interviews, and press mentions"
+        subtitle="Featured news appearances, television discussions, interviews, and media mentions"
         image={images.mediaBanner}
       />
 

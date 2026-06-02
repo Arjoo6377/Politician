@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Clock, Mail, MapPin, MessageSquare, Phone, Send } from 'lucide-react'
+import { InstagramIcon } from '../components/ui/SocialIcons'
 import { Button } from '../components/ui/Button'
 import { Card } from '../components/ui/Card'
 import { PageHero } from '../components/ui/PageHero'
@@ -9,8 +10,20 @@ import { profile } from '../data/staticContent'
 
 const contactItems = [
   { icon: MapPin, label: 'Office Address', value: profile.address },
-  { icon: Phone, label: 'Phone', value: profile.phone, href: `tel:${profile.phone.replace(/\s/g, '')}` },
-  { icon: Mail, label: 'Email', value: profile.email, href: `mailto:${profile.email}` },
+  ...(profile.phone
+    ? [{ icon: Phone, label: 'Phone', value: profile.phone, href: `tel:${profile.phone.replace(/\s/g, '')}` }]
+    : []),
+  ...(profile.email
+    ? [{ icon: Mail, label: 'Email', value: profile.email, href: `mailto:${profile.email}` }]
+    : []),
+  ...(profile.social.instagram
+    ? [{
+        icon: InstagramIcon,
+        label: 'Instagram',
+        value: '@rajeevjaitly',
+        href: profile.social.instagram,
+      }]
+    : []),
   {
     icon: Clock,
     label: 'Office Hours',
@@ -33,18 +46,17 @@ export function ContactPage() {
     <>
       <PageHero
         compact
-        title="Contact Us"
-        subtitle="Reach out for public grievances, media inquiries, or general communication"
+        title="Contact & Social Connect"
+        subtitle="Reach out for media inquiries, event invitations, or general communication"
         image={images.contactBanner}
       />
 
       <section className="py-8 md:py-12 bg-gray-50">
         <div className="max-w-6xl mx-auto px-4">
-          {/* Profile strip */}
           <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden mb-6 flex flex-col sm:flex-row">
             <img
               src={images.heroBanner}
-              alt="Constituency office"
+              alt="Office"
               className="sm:w-48 md:w-56 h-36 sm:h-auto object-cover shrink-0"
             />
             <div className="p-5 flex items-center gap-4 flex-1">
@@ -58,7 +70,6 @@ export function ContactPage() {
           </div>
 
           <div className="grid lg:grid-cols-5 gap-6 items-start">
-            {/* Contact details */}
             <div className="lg:col-span-2 space-y-4">
               <h2 className="text-lg font-bold text-gray-900 px-1">Get in Touch</h2>
               <div className="grid sm:grid-cols-2 lg:grid-cols-1 gap-3">
@@ -71,21 +82,20 @@ export function ContactPage() {
                       <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-0.5">
                         {item.label}
                       </p>
-                      {item.href ? (
-                        <a href={item.href} className="text-gray-800 text-sm font-medium hover:text-orange-600 break-all">
+                      {'href' in item && item.href ? (
+                        <a href={item.href} target={item.label === 'Instagram' ? '_blank' : undefined} rel={item.label === 'Instagram' ? 'noopener noreferrer' : undefined} className="text-gray-800 text-sm font-medium hover:text-orange-600 break-all">
                           {item.value}
                         </a>
                       ) : (
                         <p className="text-gray-800 text-sm leading-relaxed">{item.value}</p>
                       )}
-                      {item.sub && <p className="text-gray-500 text-sm mt-0.5">{item.sub}</p>}
+                      {'sub' in item && item.sub && <p className="text-gray-500 text-sm mt-0.5">{item.sub}</p>}
                     </div>
                   </Card>
                 ))}
               </div>
             </div>
 
-            {/* Contact form */}
             <div className="lg:col-span-3">
               <Card className="h-full">
                 <div className="flex items-center gap-3 mb-5 pb-4 border-b border-gray-100">
@@ -153,7 +163,6 @@ export function ContactPage() {
                           className="w-full px-3.5 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none text-sm bg-white"
                         >
                           <option value="">Select subject</option>
-                          <option value="grievance">Public Grievance</option>
                           <option value="media">Media Inquiry</option>
                           <option value="invitation">Event Invitation</option>
                           <option value="general">General Inquiry</option>

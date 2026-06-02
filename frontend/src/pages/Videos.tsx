@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Mic, Megaphone, Play, Tv } from 'lucide-react'
+import { Megaphone, Mic, Play, Tv } from 'lucide-react'
 import { Card } from '../components/ui/Card'
 import { PageHero } from '../components/ui/PageHero'
 import { SectionHeading } from '../components/ui/SectionHeading'
@@ -7,17 +7,15 @@ import { images } from '../data/images'
 import { videos } from '../data/staticContent'
 
 const categoryLabels: Record<string, string> = {
-  speech: 'Speech',
-  interview: 'Interview',
-  press: 'Press Conference',
-  campaign: 'Campaign',
+  'tv-debate': 'TV Debates',
+  interview: 'Interviews',
+  'public-speech': 'Public Speeches',
 }
 
 const categoryIcons: Record<string, typeof Play> = {
-  speech: Megaphone,
+  'tv-debate': Tv,
   interview: Mic,
-  press: Tv,
-  campaign: Megaphone,
+  'public-speech': Megaphone,
 }
 
 export function VideosPage() {
@@ -29,8 +27,8 @@ export function VideosPage() {
   return (
     <>
       <PageHero
-        title="Videos & Speeches"
-        subtitle="Speeches, interviews, press conferences, and campaign videos"
+        title="Video Gallery"
+        subtitle="Latest debates, interviews, and speeches"
         image={images.videosBanner}
       />
 
@@ -55,7 +53,7 @@ export function VideosPage() {
           )}
 
           <div className="flex flex-wrap gap-2 mb-8">
-            {['all', 'speech', 'interview', 'press', 'campaign'].map((cat) => (
+            {['all', 'tv-debate', 'interview', 'public-speech'].map((cat) => (
               <button
                 key={cat}
                 onClick={() => setFilter(cat)}

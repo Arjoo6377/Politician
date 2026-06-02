@@ -1,9 +1,7 @@
-import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { ArrowLeft, Calendar } from 'lucide-react'
-import { api } from '../api/client'
 import { getNewsImage } from '../data/images'
-import type { NewsItem } from '../types'
+import { getNewsById } from '../data/staticData'
 
 const categoryLabels: Record<string, string> = {
   announcement: 'Announcement',
@@ -14,19 +12,13 @@ const categoryLabels: Record<string, string> = {
 
 export function NewsDetail() {
   const { id } = useParams()
-  const [item, setItem] = useState<NewsItem | null>(null)
-
-  useEffect(() => {
-    if (id) {
-      api.getNewsById(id).then(setItem).catch(() => setItem(null))
-    }
-  }, [id])
+  const item = id ? getNewsById(id) : undefined
 
   if (!item) {
     return (
       <div className="max-w-7xl mx-auto px-4 py-20 text-center">
-        <p className="text-gray-500">News item not found.</p>
-        <Link to="/news" className="text-orange-600 hover:underline mt-4 inline-block">Back to News</Link>
+        <p className="text-gray-500">Announcement not found.</p>
+        <Link to="/news" className="text-orange-600 hover:underline mt-4 inline-block">Back to Announcements</Link>
       </div>
     )
   }
@@ -35,7 +27,7 @@ export function NewsDetail() {
     <article className="py-12">
       <div className="max-w-3xl mx-auto px-4">
         <Link to="/news" className="inline-flex items-center gap-2 text-orange-600 hover:underline mb-6 text-sm">
-          <ArrowLeft size={16} /> Back to News
+          <ArrowLeft size={16} /> Back to Announcements
         </Link>
 
         <span className="inline-block px-3 py-1 bg-orange-100 text-orange-700 text-xs font-semibold rounded-full mb-4">

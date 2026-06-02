@@ -1,24 +1,9 @@
 [
   {
-    "id": "423412cb-6236-4680-9949-90c4d2a44ba8",
-    "title": "hello",
-    "description": "kytfytkbgj",
-    "category": "public-meeting",
-    "date": "2026-05-31",
-    "coverImage": "https",
-    "images": [
-      {
-        "id": "img-0",
-        "url": "https",
-        "caption": ""
-      }
-    ]
-  },
-  {
     "id": "album-1",
     "title": "Republic Day Celebrations 2026",
-    "category": "event",
-    "description": "Flag hoisting ceremony and cultural programs at the constituency office.",
+    "category": "political-events",
+    "description": "Flag hoisting ceremony and official programs at the party office.",
     "date": "2026-01-26",
     "coverImage": "https://images.unsplash.com/photo-1585829367279-e4412c4c1a34?w=800",
     "images": [
@@ -30,7 +15,7 @@
       {
         "id": "img-2",
         "url": "https://images.unsplash.com/photo-1577495508048-b7d87b67b231?w=800",
-        "caption": "Community gathering"
+        "caption": "Official gathering"
       },
       {
         "id": "img-3",
@@ -41,9 +26,9 @@
   },
   {
     "id": "album-2",
-    "title": "Village Outreach Program - Block A",
-    "category": "public-meeting",
-    "description": "Direct interaction with villagers to understand local issues and development needs.",
+    "title": "Citizen Outreach Program",
+    "category": "public-engagement",
+    "description": "Direct interaction with citizens to understand local issues and development needs.",
     "date": "2026-03-15",
     "coverImage": "https://images.unsplash.com/photo-1559027615-cd4628903747?w=800",
     "images": [
@@ -55,20 +40,20 @@
       {
         "id": "img-5",
         "url": "https://images.unsplash.com/photo-1469571486222-7bfd56bef05b?w=800",
-        "caption": "Listening to grievances"
+        "caption": "Community visit"
       },
       {
         "id": "img-6",
         "url": "https://images.unsplash.com/photo-1488526537941-7dd1ef068d2e?w=800",
-        "caption": "Development discussion"
+        "caption": "Public gathering"
       }
     ]
   },
   {
     "id": "album-3",
-    "title": "TV Interview - Development Agenda",
-    "category": "media",
-    "description": "Media appearance discussing constituency development plans and public welfare initiatives.",
+    "title": "TV Studio — Development Agenda Interview",
+    "category": "media-interactions",
+    "description": "Media appearance discussing national development plans and public welfare initiatives.",
     "date": "2026-02-20",
     "coverImage": "https://images.unsplash.com/photo-1611162616305-c69b3fa7fba6?w=800",
     "images": [
@@ -86,26 +71,26 @@
   },
   {
     "id": "album-4",
-    "title": "Election Campaign Rally",
-    "category": "campaign",
-    "description": "Mass rally addressing citizens on development agenda and public service commitment.",
-    "date": "2025-04-15",
+    "title": "Meeting with Senior Party Leaders",
+    "category": "leadership-moments",
+    "description": "Official engagements and important occasions with senior leadership.",
+    "date": "2025-12-15",
     "coverImage": "https://images.unsplash.com/photo-1529107386315-e1a2af472a2e?w=800",
     "images": [
       {
         "id": "img-9",
         "url": "https://images.unsplash.com/photo-1529107386315-e1a2af472a2e?w=800",
-        "caption": "Campaign rally"
+        "caption": "Leadership meeting"
       },
       {
         "id": "img-10",
         "url": "https://images.unsplash.com/photo-1540914124286-342544d918d5?w=800",
-        "caption": "Public address"
+        "caption": "Official engagement"
       },
       {
         "id": "img-11",
         "url": "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800",
-        "caption": "Youth participation"
+        "caption": "Important occasion"
       }
     ]
   }

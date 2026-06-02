@@ -1,19 +1,12 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { ArrowLeft, Calendar, Tag, User } from 'lucide-react'
-import { api } from '../api/client'
 import { getArticleImage } from '../data/images'
-import type { Article } from '../types'
+import { getArticleBySlug } from '../data/staticData'
 
 export function ArticleDetail() {
   const { slug } = useParams()
-  const [article, setArticle] = useState<Article | null>(null)
-
-  useEffect(() => {
-    if (slug) {
-      api.getArticleBySlug(slug).then(setArticle).catch(() => setArticle(null))
-    }
-  }, [slug])
+  const article = slug ? getArticleBySlug(slug) : undefined
 
   useEffect(() => {
     if (article) {

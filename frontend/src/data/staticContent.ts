@@ -1,38 +1,37 @@
 import { images } from './images'
 
 export const profile = {
-  name: 'Shri Rajesh Kumar',
-  designation: 'Member of Legislative Assembly',
-  constituency: 'Varanasi North',
+  name: 'Rajeev Jaitly',
+  designation: 'National Spokesperson',
+  constituency: 'Bharatiya Janata Party (BJP)',
   party: 'Bharatiya Janata Party',
-  tagline: 'Dedicated to Public Service & Nation Building',
+  tagline: 'Voice of the Nation · Committed to Viksit Bharat',
   photo: images.profile,
   intro:
-    'A committed public servant working tirelessly for the development of the constituency and welfare of every citizen. With decades of grassroots experience, focused on transparent governance and inclusive growth.',
-  email: 'contact@example.com',
-  phone: '+91 98765 43210',
-  address: 'Constituency Office, Varanasi, Uttar Pradesh - 221001',
+    'A trusted voice of the BJP across regional and national platforms — communicating policy perspectives, addressing public issues, and championing the vision of a developed, inclusive India.',
+  email: 'contact@rajeevjaitly.in',
+  phone: '',
+  address: '365, Indira Enclave, Sector-21D, Faridabad, Haryana – 121012',
   social: {
-    facebook: 'https://facebook.com',
-    twitter: 'https://twitter.com',
-    instagram: 'https://instagram.com',
-    youtube: 'https://youtube.com',
+    facebook: '',
+    twitter: '',
+    instagram: 'https://instagram.com/rajeevjaitly',
+    youtube: '',
   },
 }
 
 export const mainNavLinks = [
   { label: 'Home', path: '/' },
   { label: 'About', path: '/about' },
-  { label: 'Public Work', path: '/public-work' },
   { label: 'Contact', path: '/contact' },
 ]
 
 export const mediaDropdown = [
   { label: 'Media Coverage', path: '/media' },
-  { label: 'Gallery', path: '/gallery' },
-  { label: 'Videos', path: '/videos' },
-  { label: 'News', path: '/news' },
-  { label: 'Articles', path: '/articles' },
+  { label: 'Photo Gallery', path: '/gallery' },
+  { label: 'Video Gallery', path: '/videos' },
+  { label: 'Announcements', path: '/news' },
+  { label: 'Articles & Blogs', path: '/articles' },
 ]
 
 /** All links — used in footer */
@@ -43,191 +42,166 @@ export const navLinks = [
 
 export const aboutContent = {
   introduction:
-    'Born and raised in Varanasi, I have dedicated my life to public service and community development. My journey from a grassroots worker to a public representative reflects my commitment to the ideals of seva, sanskar, and suraksha.',
+    'Rajeev Jaitly is a prominent political leader and respected public figure in India, playing a significant role in the Bharatiya Janata Party\'s (BJP) national media and communication framework. As a National Spokesperson of the BJP, he serves as a trusted voice of the party across regional and national platforms, effectively communicating policy perspectives, addressing important public issues, and engaging in meaningful political discourse.',
   politicalBackground:
-    'Active in party organization since 1995, served as district president, state executive member, and now as MLA representing the people of Varanasi North with full dedication and accountability.',
-  publicService:
-    'Led multiple welfare schemes including health camps, education drives, women empowerment programs, and infrastructure development projects benefiting over 2 lakh citizens across the constituency.',
+    'Through his articulate representation of the party\'s vision, he actively contributes towards the mission of Viksit Bharat (Developed India) — a nation driven by inclusive growth, innovation, good governance, and sustainable development.',
+  publicService: '',
   vision:
-    'Building a Viksit Bharat through grassroots empowerment, digital governance, sustainable development, and preserving our cultural heritage while embracing modern progress.',
-  ideology:
-    'Believing in Antyodaya — upliftment of the last person in the queue. Committed to nationalism, cultural pride, and inclusive development for all sections of society.',
-  achievements: [
-    'Developed 50+ km of rural roads connecting remote villages',
-    'Established 12 primary health centers in underserved areas',
-    'Launched skill development program for 5,000+ youth',
-    'Implemented clean drinking water projects in 80 villages',
-    'Led tree plantation drive planting 1 lakh+ saplings',
-    'Championed women self-help groups benefiting 3,000 families',
-  ],
-  responsibilities: [
-    'Member, Public Accounts Committee',
-    'Chairperson, District Development Council',
-    'Member, Education & Health Standing Committee',
-  ],
+    'Building a Viksit Bharat through inclusive growth, innovation, good governance, and sustainable development — empowering every citizen to participate in the nation\'s progress.',
+  ideology: '',
+  achievements: [] as string[],
+  responsibilities: [] as string[],
 }
 
-export const publicWork = [
+export const keyHighlights = [
   {
-    title: 'Health for All Initiative',
-    category: 'Social Work',
+    title: 'National Spokesperson',
+    image: images.highlights.roads,
+    description: 'Bharatiya Janata Party (BJP) — the trusted voice of the party on national and regional platforms.',
+  },
+  {
+    title: 'Political Communication & Public Engagement',
+    image: images.highlights.healthcare,
+    description: 'Effectively communicating policy perspectives and engaging citizens in meaningful political discourse.',
+  },
+  {
+    title: 'Media Representation & Public Affairs',
+    image: images.highlights.youth,
+    description: 'Representing the BJP across television debates, interviews, press conferences, and media interactions.',
+  },
+  {
+    title: 'Leadership & Nation Building Initiatives',
     image: images.publicWork.health,
-    description:
-      'Free health camps organized across 45 villages providing medical checkups, medicines, and specialist consultations to over 15,000 beneficiaries.',
-    impact: '15,000+ beneficiaries',
-  },
-  {
-    title: 'Education Support Program',
-    category: 'Public Welfare',
-    image: images.publicWork.education,
-    description:
-      'Distribution of school kits, scholarships for meritorious students, and digital learning centers in rural schools.',
-    impact: '2,500 students supported',
-  },
-  {
-    title: 'Swachh Bharat Campaign',
-    category: 'Campaign',
-    image: images.publicWork.swachh,
-    description:
-      'Community-led cleanliness drives, waste management awareness, and construction of public toilets in slum areas.',
-    impact: '120 wards covered',
-  },
-  {
-    title: 'Youth Skill Development',
-    category: 'Development',
-    image: images.publicWork.youth,
-    description:
-      'Vocational training in IT, tailoring, and agriculture technology with placement assistance for unemployed youth.',
-    impact: '800 youth trained',
-  },
-  {
-    title: 'Women Empowerment Sabha',
-    category: 'Community Engagement',
-    image: images.publicWork.women,
-    description:
-      'Regular meetings with women groups addressing safety, livelihood, and government scheme awareness.',
-    impact: '150 SHGs formed',
-  },
-  {
-    title: 'Farmer Support Cell',
-    category: 'Development',
-    image: images.publicWork.farmer,
-    description:
-      'Kisan helpline, crop insurance awareness, and direct market linkages for agricultural produce.',
-    impact: '5,000 farmers registered',
+    description: 'Contributing to the mission of Viksit Bharat through leadership, governance advocacy, and public service.',
   },
 ]
 
+/** @deprecated Use keyHighlights — kept for backward compatibility */
+export const homeHighlights = keyHighlights
+
+export const publicWork = keyHighlights.map((item) => ({
+  title: item.title,
+  category: 'Leadership',
+  image: item.image,
+  description: item.description,
+  impact: 'BJP · Viksit Bharat',
+}))
+
 export const mediaCoverage = [
   {
-    title: 'Development Agenda for Varanasi',
-    outlet: 'Times of India',
-    type: 'News Coverage',
-    date: '2026-03-15',
-    image: images.media.news1,
-    excerpt: 'MLA outlines comprehensive development plan for constituency focusing on infrastructure and healthcare.',
-  },
-  {
-    title: 'Debate on Rural Healthcare',
-    outlet: 'NDTV',
+    title: 'National Debate on Economic Policy & Viksit Bharat',
+    outlet: 'Times Now',
     type: 'TV Debate',
-    date: '2026-02-28',
+    date: '2026-04-10',
     image: images.media.debate,
-    excerpt: 'Participated in prime-time debate discussing challenges and solutions for rural healthcare infrastructure.',
+    excerpt: 'Participated in a prime-time debate on economic reforms, inclusive growth, and the roadmap towards a developed India.',
   },
   {
-    title: 'Interview: Vision for Youth',
+    title: 'Exclusive Interview: BJP\'s Vision for 2026',
     outlet: 'India Today',
     type: 'Interview',
-    date: '2026-01-20',
+    date: '2026-03-22',
     image: images.media.interview,
-    excerpt: 'Exclusive interview on youth employment, skill development, and startup ecosystem in tier-2 cities.',
+    excerpt: 'In-depth discussion on the party\'s policy agenda, governance priorities, and communication strategy for national development.',
   },
   {
-    title: 'Press Release: Budget Response',
-    outlet: 'Press Trust of India',
+    title: 'Press Conference on Government Initiatives',
+    outlet: 'PTI',
     type: 'Press Mention',
-    date: '2026-01-05',
+    date: '2026-02-15',
     image: images.media.press,
-    excerpt: 'Welcomed state budget provisions for rural development and women welfare schemes.',
+    excerpt: 'Addressed media on key government welfare schemes, digital governance, and public outreach programs.',
   },
   {
-    title: 'Ground Report: Village Transformation',
+    title: 'Panel Discussion on National Security',
     outlet: 'Republic Bharat',
-    type: 'Media Highlight',
-    date: '2025-12-10',
-    image: images.media.village,
-    excerpt: 'Feature story on successful implementation of Jal Jeevan Mission in adopted villages.',
+    type: 'TV Debate',
+    date: '2026-01-28',
+    image: images.media.news1,
+    excerpt: 'Shared perspectives on national security, border policy, and India\'s role in regional stability.',
   },
   {
-    title: 'Panel Discussion on Education Reform',
+    title: 'Feature: Voice of the BJP on National Media',
+    outlet: 'The Hindu',
+    type: 'News Coverage',
+    date: '2025-12-05',
+    image: images.media.village,
+    excerpt: 'Profile feature on Rajeev Jaitly\'s role as National Spokesperson and his contribution to political communication.',
+  },
+  {
+    title: 'Debate on Education & Skill Development',
     outlet: 'ABP News',
     type: 'TV Debate',
-    date: '2025-11-22',
+    date: '2025-11-18',
     image: images.media.education,
-    excerpt: 'Shared insights on NEP implementation and digital education in government schools.',
+    excerpt: 'Discussed NEP implementation, youth skill development, and employment generation strategies.',
   },
 ]
 
 export const videos = [
   {
     id: '1',
-    title: 'Independence Day Address to Constituency',
+    title: 'Prime-Time Debate on Viksit Bharat Agenda',
     youtubeId: 'dQw4w9WgXcQ',
-    category: 'speech' as const,
-    date: '2025-08-15',
+    category: 'tv-debate' as const,
+    date: '2026-04-10',
   },
   {
     id: '2',
-    title: 'Interview on Public Service Journey',
+    title: 'Political Discussion on Economic Reforms',
     youtubeId: 'dQw4w9WgXcQ',
-    category: 'interview' as const,
-    date: '2025-07-10',
+    category: 'tv-debate' as const,
+    date: '2026-03-28',
   },
   {
     id: '3',
-    title: 'Press Conference on Development Projects',
+    title: 'Current Affairs Debate — National Development',
     youtubeId: 'dQw4w9WgXcQ',
-    category: 'press' as const,
-    date: '2025-06-05',
+    category: 'tv-debate' as const,
+    date: '2026-02-20',
   },
   {
     id: '4',
-    title: 'Campaign Rally Highlights',
+    title: 'Television Interview — BJP\'s Policy Vision',
     youtubeId: 'dQw4w9WgXcQ',
-    category: 'campaign' as const,
-    date: '2025-04-20',
+    category: 'interview' as const,
+    date: '2026-03-22',
   },
   {
     id: '5',
-    title: 'Budget Session Speech in Assembly',
+    title: 'Podcast Interview on Governance & Public Affairs',
     youtubeId: 'dQw4w9WgXcQ',
-    category: 'speech' as const,
-    date: '2025-03-12',
+    category: 'interview' as const,
+    date: '2026-01-15',
   },
   {
     id: '6',
-    title: 'Town Hall with Citizens',
+    title: 'Media Interaction — Press Briefing Highlights',
     youtubeId: 'dQw4w9WgXcQ',
     category: 'interview' as const,
-    date: '2025-02-08',
+    date: '2025-12-08',
+  },
+  {
+    id: '7',
+    title: 'Address at BJP National Executive Meeting',
+    youtubeId: 'dQw4w9WgXcQ',
+    category: 'public-speech' as const,
+    date: '2026-02-05',
+  },
+  {
+    id: '8',
+    title: 'Public Address on Citizen Engagement',
+    youtubeId: 'dQw4w9WgXcQ',
+    category: 'public-speech' as const,
+    date: '2025-11-20',
+  },
+  {
+    id: '9',
+    title: 'Conference Speech on Viksit Bharat Mission',
+    youtubeId: 'dQw4w9WgXcQ',
+    category: 'public-speech' as const,
+    date: '2025-10-12',
   },
 ]
 
-export const homeHighlights = [
-  {
-    title: 'Rural Road Development',
-    image: images.highlights.roads,
-    description: '50+ km of all-weather roads connecting remote villages to main highways.',
-  },
-  {
-    title: 'Healthcare Expansion',
-    image: images.highlights.healthcare,
-    description: '12 new primary health centers serving underserved rural communities.',
-  },
-  {
-    title: 'Youth Employment Drive',
-    image: images.highlights.youth,
-    description: 'Skill training and placement program for 800+ young citizens.',
-  },
-]
+export const featuredVideos = videos.slice(0, 9)

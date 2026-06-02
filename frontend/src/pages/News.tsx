@@ -1,11 +1,10 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Calendar, Megaphone } from 'lucide-react'
 import { PageHero } from '../components/ui/PageHero'
-import { api } from '../api/client'
 import { Card } from '../components/ui/Card'
 import { getNewsImage, images } from '../data/images'
-import type { NewsItem } from '../types'
+import { newsItems } from '../data/staticData'
 
 const categoryLabels: Record<string, string> = {
   announcement: 'Announcement',
@@ -15,24 +14,15 @@ const categoryLabels: Record<string, string> = {
 }
 
 export function NewsPage() {
-  const [news, setNews] = useState<NewsItem[]>([])
   const [filter, setFilter] = useState<string>('all')
-  const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    api.getNews()
-      .then(setNews)
-      .catch(() => setNews([]))
-      .finally(() => setLoading(false))
-  }, [])
-
-  const filtered = filter === 'all' ? news : news.filter((n) => n.category === filter)
+  const filtered = filter === 'all' ? newsItems : newsItems.filter((n) => n.category === filter)
 
   return (
     <>
       <PageHero
-        title="News & Announcements"
-        subtitle="Public announcements, press releases, event updates, and messages"
+        title="Announcements"
+        subtitle="Latest updates, official statements, upcoming events, and important notices"
         image={images.newsBanner}
       />
 
@@ -52,12 +42,10 @@ export function NewsPage() {
             ))}
           </div>
 
-          {loading ? (
-            <p className="text-center text-gray-500">Loading news...</p>
-          ) : filtered.length === 0 ? (
+          {filtered.length === 0 ? (
             <div className="text-center py-16">
               <Megaphone size={48} className="mx-auto text-gray-300 mb-4" />
-              <p className="text-gray-500">No news items found.</p>
+              <p className="text-gray-500">No announcements found.</p>
             </div>
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
