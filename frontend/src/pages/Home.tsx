@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Icon, type IconName } from '../components/ui/Icon'
 import { InstagramIcon } from '../components/ui/SocialIcons'
 import { ProfileImage } from '../components/ui/ProfileImage'
 import { Button } from '../components/ui/Button'
 import { Card } from '../components/ui/Card'
+import { getReelEmbedUrl, ReelPlayerModal } from '../components/ui/ReelPlayerModal'
 import { SectionHeading } from '../components/ui/SectionHeading'
 import { getNewsImage, images } from '../data/images'
 import { newsItems } from '../data/staticData'
@@ -32,14 +33,7 @@ export function Home() {
   const socialLinks = [
     { icon: InstagramIcon, href: profile.social.instagram, label: 'Instagram', handle: '@rajeevjaitly' },
   ].filter((s) => s.href)
-  const getEmbedUrl = (url: string) => `${url.replace(/\/$/, '')}/embed`
-
-  useEffect(() => {
-    document.body.style.overflow = playingHomeVideo ? 'hidden' : ''
-    return () => {
-      document.body.style.overflow = ''
-    }
-  }, [playingHomeVideo])
+  const getPreviewEmbedUrl = (url: string) => `${url.replace(/\/$/, '')}/embed`
 
   return (
     <>
@@ -52,19 +46,36 @@ export function Home() {
         </div>
         <div className="relative max-w-7xl mx-auto px-4 py-12 md:py-16 w-full">
           <div className="grid lg:grid-cols-2 gap-8 items-center">
-            <div>
-              <p className="text-orange-100 font-medium mb-2">{profile.party}</p>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-3">{profile.name}</h1>
-              <p className="text-xl md:text-2xl text-orange-100 mb-1">{profile.designation}</p>
-              <p className="text-lg text-orange-50 mb-5">{profile.constituency}</p>
-              <p className="text-lg leading-relaxed mb-6 max-w-xl">{profile.intro}</p>
-              <div className="flex flex-wrap gap-4">
-                <Button to="/about" variant="secondary" size="lg">
-                  Know More <Icon name="arrow-right" size={18} />
-                </Button>
-                <Button to="/contact" variant="outline" size="lg" className="border-white text-white hover:bg-white/10">
-                  Contact Us
-                </Button>
+            <div className="min-w-0">
+              <div className="grid grid-cols-[minmax(0,1fr)_clamp(7.5rem,32vw,10.5rem)] gap-x-3 sm:gap-x-4 items-start lg:block">
+                <p className="text-orange-100 font-medium mb-2 text-sm sm:text-base col-start-1 row-start-1">
+                  {profile.party}
+                </p>
+                <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight col-start-1 row-start-2 mb-0 lg:mb-3">
+                  {profile.name}
+                </h1>
+
+                <div className="col-start-2 row-start-1 row-span-4 flex items-center justify-center lg:hidden">
+                  <ProfileImage bordered className="!w-32 !h-32 sm:!w-36 sm:!h-36 md:!w-40 md:!h-40" />
+                </div>
+
+                <p className="text-lg sm:text-xl md:text-2xl text-orange-100 mb-1 mt-3 col-start-1 row-start-3 lg:mt-0">
+                  {profile.designation}
+                </p>
+                <p className="text-base sm:text-lg text-orange-50 mb-4 sm:mb-5 col-start-1 row-start-4">
+                  {profile.constituency}
+                </p>
+                <p className="text-base sm:text-lg leading-relaxed mb-6 max-w-xl col-start-1 row-start-5 lg:row-auto">
+                  {profile.intro}
+                </p>
+                <div className="flex flex-wrap gap-3 sm:gap-4 col-start-1 row-start-6 col-span-2 lg:col-span-1 lg:row-auto">
+                  <Button to="/about" variant="secondary" size="lg">
+                    Know More <Icon name="arrow-right" size={18} />
+                  </Button>
+                  <Button to="/contact" variant="outline" size="lg" className="border-white text-white hover:bg-white/10">
+                    Contact Us
+                  </Button>
+                </div>
               </div>
             </div>
             <div className="hidden lg:flex justify-center">
@@ -145,19 +156,14 @@ export function Home() {
                     }`}
                   >
                     <iframe
-                      src={getEmbedUrl(video.sourceUrl)}
+                      src={getPreviewEmbedUrl(video.sourceUrl)}
                       title={`${video.title} preview`}
-                      className="w-full h-full pointer-events-none"
+                      className="w-full h-full pointer-events-none border-0"
                       loading="lazy"
                       allow="encrypted-media; picture-in-picture; web-share"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/15 to-black/10" />
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="w-16 h-16 bg-white/80 rounded-full flex items-center justify-center shadow-lg">
-                        <Icon name="play" size={26} className="text-gray-900 ml-0.5" />
-                      </div>
-                    </div>
-                    <div className="absolute left-3 right-3 bottom-3 text-left">
+                    <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/80 to-transparent pointer-events-none" />
+                    <div className="absolute left-3 right-3 bottom-3 text-left pointer-events-none">
                       <p className="text-white font-semibold text-sm line-clamp-2">{video.title}</p>
                       <p className="text-orange-100 text-xs mt-1">
                         {videoCategoryLabels[video.category]} · {new Date(video.date).toLocaleDateString('en-IN')}
@@ -251,33 +257,11 @@ export function Home() {
       </section>
 
       {playingHomeVideo && (
-        <div
-          className="fixed inset-0 z-50 bg-black/75 p-4 md:p-8 flex items-center justify-center"
-          onClick={() => setPlayingHomeVideo(null)}
-        >
-          <div
-            className="relative w-full max-w-md md:max-w-lg"
-            onClick={(event) => event.stopPropagation()}
-          >
-            <button
-              type="button"
-              onClick={() => setPlayingHomeVideo(null)}
-              className="absolute -top-12 right-0 text-white/90 hover:text-white"
-              aria-label="Close video"
-            >
-              <Icon name="x" size={28} />
-            </button>
-            <div className="rounded-2xl overflow-hidden shadow-2xl bg-black aspect-[9/16]">
-              <iframe
-                src={getEmbedUrl(playingHomeVideo.sourceUrl)}
-                title={playingHomeVideo.title}
-                className="w-full h-full"
-                allow="autoplay; encrypted-media; picture-in-picture; web-share"
-                allowFullScreen
-              />
-            </div>
-          </div>
-        </div>
+        <ReelPlayerModal
+          embedUrl={getReelEmbedUrl(playingHomeVideo.sourceUrl)}
+          title={playingHomeVideo.title}
+          onClose={() => setPlayingHomeVideo(null)}
+        />
       )}
     </>
   )

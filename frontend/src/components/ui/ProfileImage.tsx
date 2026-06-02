@@ -16,15 +16,17 @@ const sizes = {
 }
 
 export function ProfileImage({ size = 'md', className, bordered = false }: ProfileImageProps) {
+  const hasCustomSize = Boolean(className?.match(/[!]?w-/))
+
   return (
     <img
       src={images.profile}
       alt={profile.name}
       className={cn(
-        'object-cover object-[center_18%] rounded-full',
-        sizes[size],
+        'object-cover object-[center_24%] rounded-full',
+        !hasCustomSize && sizes[size],
         bordered && 'border-4 border-white/40 shadow-xl',
-        size === 'xl' && 'rounded-2xl object-[center_22%]',
+        size === 'xl' && !hasCustomSize && 'rounded-2xl object-[center_28%]',
         className
       )}
     />

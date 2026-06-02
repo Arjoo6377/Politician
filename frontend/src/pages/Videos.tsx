@@ -1,5 +1,6 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { Icon } from '../components/ui/Icon'
+import { getReelEmbedUrl, ReelPlayerModal } from '../components/ui/ReelPlayerModal'
 import { PageHero } from '../components/ui/PageHero'
 import { images } from '../data/images'
 import { videos } from '../data/staticContent'
@@ -22,14 +23,7 @@ export function VideosPage() {
 
   const activeIndex = filtered.findIndex((video) => video.id === activeVideo?.id)
   const reelDots = filtered.slice(0, 6)
-  const getEmbedUrl = (url: string) => `${url.replace(/\/$/, '')}/embed`
-
-  useEffect(() => {
-    document.body.style.overflow = playingVideo ? 'hidden' : ''
-    return () => {
-      document.body.style.overflow = ''
-    }
-  }, [playingVideo])
+  const getPreviewEmbedUrl = (url: string) => `${url.replace(/\/$/, '')}/embed`
 
   return (
     <>
@@ -90,19 +84,14 @@ export function VideosPage() {
                     }`}
                   >
                     <iframe
-                      src={getEmbedUrl(video.sourceUrl)}
+                      src={getPreviewEmbedUrl(video.sourceUrl)}
                       title={`${video.title} preview`}
-                      className="w-full h-full pointer-events-none"
+                      className="w-full h-full pointer-events-none border-0"
                       loading="lazy"
                       allow="encrypted-media; picture-in-picture; web-share"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/15 to-black/10" />
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="w-16 h-16 bg-white/80 rounded-full flex items-center justify-center shadow-lg">
-                        <Icon name="play" size={26} className="text-gray-900 ml-0.5" />
-                      </div>
-                    </div>
-                    <div className="absolute left-3 right-3 bottom-3 text-left">
+                    <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/80 to-transparent pointer-events-none" />
+                    <div className="absolute left-3 right-3 bottom-3 text-left pointer-events-none">
                       <p className="text-white font-semibold text-sm line-clamp-2">{video.title}</p>
                       <p className="text-orange-100 text-xs mt-1">
                         {categoryLabels[video.category]} · {new Date(video.date).toLocaleDateString('en-IN')}
@@ -145,33 +134,11 @@ export function VideosPage() {
       </section>
 
       {playingVideo && (
-        <div
-          className="fixed inset-0 z-50 bg-black/75 p-4 md:p-8 flex items-center justify-center"
-          onClick={() => setPlayingVideo(null)}
-        >
-          <div
-            className="relative w-full max-w-md md:max-w-lg"
-            onClick={(event) => event.stopPropagation()}
-          >
-            <button
-              type="button"
-              onClick={() => setPlayingVideo(null)}
-              className="absolute -top-12 right-0 text-white/90 hover:text-white"
-              aria-label="Close video"
-            >
-              <Icon name="x" size={28} />
-            </button>
-            <div className="rounded-2xl overflow-hidden shadow-2xl bg-black aspect-[9/16]">
-              <iframe
-                src={getEmbedUrl(playingVideo.sourceUrl)}
-                title={playingVideo.title}
-                className="w-full h-full"
-                allow="autoplay; encrypted-media; picture-in-picture; web-share"
-                allowFullScreen
-              />
-            </div>
-          </div>
-        </div>
+        <ReelPlayerModal
+          embedUrl={getReelEmbedUrl(playingVideo.sourceUrl)}
+          title={playingVideo.title}
+          onClose={() => setPlayingVideo(null)}
+        />
       )}
     </>
   )
