@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Mail, MapPin, Phone } from 'lucide-react'
+import { Icon } from '../ui/Icon'
 import { FacebookIcon, InstagramIcon, YoutubeIcon } from '../ui/SocialIcons'
 import { navLinks, profile } from '../../data/staticContent'
 
@@ -31,15 +31,15 @@ export function Footer() {
             <h4 className="text-white font-semibold mb-4">Contact</h4>
             <ul className="space-y-3 text-sm">
               <li className="flex items-start gap-2">
-                <MapPin size={16} className="mt-0.5 shrink-0 text-orange-400" />
+                <Icon name="map-pin" size={16} className="mt-0.5 shrink-0 text-orange-400" />
                 {profile.address}
               </li>
               <li className="flex items-center gap-2">
-                <Phone size={16} className="shrink-0 text-orange-400" />
+                <Icon name="phone" size={16} className="shrink-0 text-orange-400" />
                 {profile.phone}
               </li>
               <li className="flex items-center gap-2">
-                <Mail size={16} className="shrink-0 text-orange-400" />
+                <Icon name="mail" size={16} className="shrink-0 text-orange-400" />
                 {profile.email}
               </li>
             </ul>
@@ -48,15 +48,21 @@ export function Footer() {
           <div>
             <h4 className="text-white font-semibold mb-4">Follow Us</h4>
             <div className="flex gap-3">
-              <a href={profile.social.facebook} target="_blank" rel="noopener noreferrer" className="p-2 bg-gray-800 rounded-lg hover:bg-orange-600 transition-colors" aria-label="Facebook">
-                <FacebookIcon size={20} />
-              </a>
-              <a href={profile.social.instagram} target="_blank" rel="noopener noreferrer" className="p-2 bg-gray-800 rounded-lg hover:bg-orange-600 transition-colors" aria-label="Instagram">
-                <InstagramIcon size={20} />
-              </a>
-              <a href={profile.social.youtube} target="_blank" rel="noopener noreferrer" className="p-2 bg-gray-800 rounded-lg hover:bg-orange-600 transition-colors" aria-label="YouTube">
-                <YoutubeIcon size={20} />
-              </a>
+              {profile.social.facebook && (
+                <a href={profile.social.facebook} target="_blank" rel="noopener noreferrer" className="p-2 bg-gray-800 rounded-lg hover:bg-orange-600 transition-colors" aria-label="Facebook">
+                  <FacebookIcon size={20} />
+                </a>
+              )}
+              {profile.social.instagram && (
+                <a href={profile.social.instagram} target="_blank" rel="noopener noreferrer" className="p-2 bg-gray-800 rounded-lg hover:bg-orange-600 transition-colors" aria-label="Instagram">
+                  <InstagramIcon size={20} />
+                </a>
+              )}
+              {profile.social.youtube && (
+                <a href={profile.social.youtube} target="_blank" rel="noopener noreferrer" className="p-2 bg-gray-800 rounded-lg hover:bg-orange-600 transition-colors" aria-label="YouTube">
+                  <YoutubeIcon size={20} />
+                </a>
+              )}
             </div>
           </div>
         </div>

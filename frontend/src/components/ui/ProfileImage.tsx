@@ -1,4 +1,5 @@
 import { images } from '../../data/images'
+import { profile } from '../../data/staticContent'
 import { cn } from '../../utils/cn'
 
 interface ProfileImageProps {
@@ -18,12 +19,12 @@ export function ProfileImage({ size = 'md', className, bordered = false }: Profi
   return (
     <img
       src={images.profile}
-      alt="Profile"
+      alt={profile.name}
       className={cn(
-        'object-cover rounded-full',
+        'object-cover object-[center_18%] rounded-full',
         sizes[size],
         bordered && 'border-4 border-white/40 shadow-xl',
-        size === 'xl' && 'rounded-2xl',
+        size === 'xl' && 'rounded-2xl object-[center_22%]',
         className
       )}
     />

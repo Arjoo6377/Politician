@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Calendar, Image } from 'lucide-react'
+import { Icon } from '../components/ui/Icon'
 import { PageHero } from '../components/ui/PageHero'
 import { images } from '../data/images'
 import { galleryAlbums } from '../data/staticData'
@@ -45,7 +45,7 @@ export function GalleryPage() {
 
           {filtered.length === 0 ? (
             <div className="text-center py-16">
-              <Image size={48} className="mx-auto text-gray-300 mb-4" />
+              <Icon name="image" size={48} className="mx-auto text-gray-300 mb-4" />
               <p className="text-gray-500">No albums found in this category.</p>
             </div>
           ) : (
@@ -70,7 +70,7 @@ export function GalleryPage() {
                     <h3 className="text-lg font-bold text-gray-900 mt-2 mb-1">{album.title}</h3>
                     <p className="text-sm text-gray-600 line-clamp-2 mb-3">{album.description}</p>
                     <div className="flex items-center gap-2 text-xs text-gray-400">
-                      <Calendar size={14} />
+                      <Icon name="calendar" size={14} />
                       {new Date(album.date).toLocaleDateString('en-IN')}
                       <span className="ml-auto">{album.images.length} photos</span>
                     </div>

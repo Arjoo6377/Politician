@@ -40,7 +40,8 @@ export interface GalleryImage {
 export interface VideoItem {
   id: string
   title: string
-  youtubeId: string
+  sourceUrl: string
+  thumbnail: string
   category: 'tv-debate' | 'interview' | 'public-speech'
   date: string
 }

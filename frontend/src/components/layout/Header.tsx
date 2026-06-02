@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
-import { ChevronDown, Menu, X } from 'lucide-react'
+import { Icon } from '../ui/Icon'
 import { ProfileImage } from '../ui/ProfileImage'
 import { mainNavLinks, mediaDropdown, profile } from '../../data/staticContent'
 
@@ -70,7 +70,8 @@ export function Header() {
                 aria-haspopup="true"
               >
                 Media
-                <ChevronDown
+                <Icon
+                  name="chevron-down"
                   size={16}
                   className={`transition-transform duration-200 ${mediaOpen ? 'rotate-180' : ''}`}
                 />
@@ -111,7 +112,7 @@ export function Header() {
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle menu"
           >
-            {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+            {mobileOpen ? <Icon name="x" size={24} /> : <Icon name="menu" size={24} />}
           </button>
         </div>
 
@@ -137,7 +138,8 @@ export function Header() {
                   }`}
                 >
                   Media
-                  <ChevronDown
+                  <Icon
+                    name="chevron-down"
                     size={16}
                     className={`transition-transform duration-200 ${mobileMediaOpen ? 'rotate-180' : ''}`}
                   />

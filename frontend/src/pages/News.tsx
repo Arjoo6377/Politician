@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Calendar, Megaphone } from 'lucide-react'
+import { Icon } from '../components/ui/Icon'
 import { PageHero } from '../components/ui/PageHero'
 import { Card } from '../components/ui/Card'
 import { getNewsImage, images } from '../data/images'
@@ -44,7 +44,7 @@ export function NewsPage() {
 
           {filtered.length === 0 ? (
             <div className="text-center py-16">
-              <Megaphone size={48} className="mx-auto text-gray-300 mb-4" />
+              <Icon name="megaphone" size={48} className="mx-auto text-gray-300 mb-4" />
               <p className="text-gray-500">No announcements found.</p>
             </div>
           ) : (
@@ -64,7 +64,7 @@ export function NewsPage() {
                   <p className="text-gray-600 text-sm mb-4 line-clamp-3">{item.excerpt}</p>
                   <div className="flex items-center justify-between">
                     <span className="flex items-center gap-1 text-xs text-gray-400">
-                      <Calendar size={14} />
+                      <Icon name="calendar" size={14} />
                       {new Date(item.date).toLocaleDateString('en-IN')}
                     </span>
                     <Link to={`/news/${item.id}`} className="text-orange-600 font-semibold text-sm hover:underline">

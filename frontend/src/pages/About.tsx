@@ -1,4 +1,4 @@
-import { Eye, Flag } from 'lucide-react'
+import { Icon } from '../components/ui/Icon'
 import { Card } from '../components/ui/Card'
 import { PageHero } from '../components/ui/PageHero'
 import { ProfileImage } from '../components/ui/ProfileImage'
@@ -31,7 +31,7 @@ export function About() {
               <img src={images.media.debate} alt="Media representation" className="w-full h-40 object-cover" />
               <div className="p-6">
                 <div className="flex items-center gap-3 mb-4">
-                  <Flag className="text-orange-600" size={28} />
+                  <Icon name="flag" className="text-orange-600" size={28} />
                   <h3 className="text-xl font-bold">National Spokesperson</h3>
                 </div>
                 <p className="text-gray-600 leading-relaxed">
@@ -45,7 +45,7 @@ export function About() {
               <img src={images.highlights.healthcare} alt="Viksit Bharat vision" className="w-full h-40 object-cover" />
               <div className="p-6">
                 <div className="flex items-center gap-3 mb-4">
-                  <Eye className="text-orange-600" size={28} />
+                  <Icon name="eye" className="text-orange-600" size={28} />
                   <h3 className="text-xl font-bold">Vision — Viksit Bharat</h3>
                 </div>
                 <p className="text-gray-600 leading-relaxed">{aboutContent.vision}</p>

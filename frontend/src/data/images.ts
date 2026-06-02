@@ -1,7 +1,9 @@
+import profilePhoto from '../assets/photo.jpeg'
+
 /** Central image URLs — replace with your own photos in production */
 export const images = {
-  profile: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&h=600&fit=crop',
-  profileAlt: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=600&h=600&fit=crop',
+  profile: profilePhoto,
+  profileAlt: profilePhoto,
 
   heroBanner: 'https://images.unsplash.com/photo-1529107386315-e1a2af472a2e?w=1920&fit=crop',
   aboutBanner: 'https://images.unsplash.com/photo-1577495508048-b7d87b67b231?w=1920&fit=crop',

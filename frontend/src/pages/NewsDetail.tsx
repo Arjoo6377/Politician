@@ -1,5 +1,5 @@
 import { Link, useParams } from 'react-router-dom'
-import { ArrowLeft, Calendar } from 'lucide-react'
+import { Icon } from '../components/ui/Icon'
 import { getNewsImage } from '../data/images'
 import { getNewsById } from '../data/staticData'
 
@@ -27,7 +27,7 @@ export function NewsDetail() {
     <article className="py-12">
       <div className="max-w-3xl mx-auto px-4">
         <Link to="/news" className="inline-flex items-center gap-2 text-orange-600 hover:underline mb-6 text-sm">
-          <ArrowLeft size={16} /> Back to Announcements
+          <Icon name="arrow-left" size={16} /> Back to Announcements
         </Link>
 
         <span className="inline-block px-3 py-1 bg-orange-100 text-orange-700 text-xs font-semibold rounded-full mb-4">
@@ -37,7 +37,7 @@ export function NewsDetail() {
         <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{item.title}</h1>
 
         <div className="flex items-center gap-2 text-gray-500 text-sm mb-8">
-          <Calendar size={16} />
+          <Icon name="calendar" size={16} />
           {new Date(item.date).toLocaleDateString('en-IN', { dateStyle: 'long' })}
         </div>
 

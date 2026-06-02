@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { ArrowRight, Megaphone, Newspaper, Play, Video } from 'lucide-react'
+import { Icon, type IconName } from '../components/ui/Icon'
 import { InstagramIcon } from '../components/ui/SocialIcons'
 import { ProfileImage } from '../components/ui/ProfileImage'
 import { Button } from '../components/ui/Button'
@@ -9,11 +9,11 @@ import { getNewsImage, images } from '../data/images'
 import { newsItems } from '../data/staticData'
 import { featuredVideos, keyHighlights, profile } from '../data/staticContent'
 
-const quickNavItems = [
-  { label: 'Video Gallery', path: '/videos', icon: Video, image: images.quickNav.gallery },
-  { label: 'Photo Gallery', path: '/gallery', icon: Megaphone, image: images.quickNav.publicWork },
-  { label: 'Media Coverage', path: '/media', icon: Newspaper, image: images.quickNav.media },
-  { label: 'Announcements', path: '/news', icon: Megaphone, image: images.quickNav.news },
+const quickNavItems: { label: string; path: string; icon: IconName; image: string }[] = [
+  { label: 'Video Gallery', path: '/videos', icon: 'video', image: images.quickNav.gallery },
+  { label: 'Photo Gallery', path: '/gallery', icon: 'image', image: images.quickNav.publicWork },
+  { label: 'Media Coverage', path: '/media', icon: 'newspaper', image: images.quickNav.media },
+  { label: 'Announcements', path: '/news', icon: 'megaphone', image: images.quickNav.news },
 ]
 
 const videoCategoryLabels: Record<string, string> = {
@@ -48,7 +48,7 @@ export function Home() {
               <p className="text-lg leading-relaxed mb-6 max-w-xl">{profile.intro}</p>
               <div className="flex flex-wrap gap-4">
                 <Button to="/about" variant="secondary" size="lg">
-                  Know More <ArrowRight size={18} />
+                  Know More <Icon name="arrow-right" size={18} />
                 </Button>
                 <Button to="/contact" variant="outline" size="lg" className="border-white text-white hover:bg-white/10">
                   Contact Us
@@ -75,7 +75,7 @@ export function Home() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-3 flex items-center gap-2">
                   <div className="p-1.5 bg-white/20 backdrop-blur rounded-lg">
-                    <item.icon size={16} className="text-white" />
+                    <Icon name={item.icon} size={16} className="text-white" />
                   </div>
                   <span className="font-semibold text-white text-sm">{item.label}</span>
                 </div>
@@ -107,26 +107,31 @@ export function Home() {
           <SectionHeading compact title="Video Gallery" subtitle="Latest debates, interviews & speeches" />
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {featuredVideos.map((video) => (
-              <Link key={video.id} to="/videos" className="group">
+              <a
+                key={video.id}
+                href={video.sourceUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group"
+              >
                 <Card className="!p-0 overflow-hidden hover:shadow-lg transition-shadow">
                   <div className="aspect-video bg-gray-900 relative overflow-hidden">
                     <img
-                      src={`https://img.youtube.com/vi/${video.youtubeId}/mqdefault.jpg`}
+                      src={video.thumbnail}
                       alt={video.title}
                       className="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-300"
                     />
                     <div className="absolute inset-0 flex items-center justify-center">
                       <div className="w-12 h-12 bg-orange-600 rounded-full flex items-center justify-center">
-                        <Play size={20} className="text-white ml-0.5" fill="white" />
+                        <Icon name="play" size={20} className="text-white ml-0.5" />
                       </div>
                     </div>
                   </div>
                   <div className="p-4">
                     <span className="text-xs font-semibold text-orange-600">{videoCategoryLabels[video.category]}</span>
-                    <h3 className="font-bold text-gray-900 mt-1 line-clamp-2">{video.title}</h3>
                   </div>
                 </Card>
-              </Link>
+              </a>
             ))}
           </div>
           <div className="text-center mt-6">

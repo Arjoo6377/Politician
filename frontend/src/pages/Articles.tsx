@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Calendar, FileText, Tag } from 'lucide-react'
+import { Icon } from '../components/ui/Icon'
 import { PageHero } from '../components/ui/PageHero'
 import { Card } from '../components/ui/Card'
 import { SectionHeading } from '../components/ui/SectionHeading'
@@ -41,7 +41,7 @@ export function ArticlesPage() {
 
           {filtered.length === 0 ? (
             <div className="text-center py-16">
-              <FileText size={48} className="mx-auto text-gray-300 mb-4" />
+              <Icon name="file-text" size={48} className="mx-auto text-gray-300 mb-4" />
               <p className="text-gray-500">No articles published yet.</p>
             </div>
           ) : (
@@ -64,13 +64,13 @@ export function ArticlesPage() {
                     <div className="flex flex-wrap gap-1 mb-4">
                       {article.tags.slice(0, 3).map((tag) => (
                         <span key={tag} className="inline-flex items-center gap-1 text-xs text-gray-500 bg-gray-100 px-2 py-0.5 rounded">
-                          <Tag size={10} /> {tag}
+                          <Icon name="tag" size={10} /> {tag}
                         </span>
                       ))}
                     </div>
                     <div className="flex items-center justify-between pt-3 border-t border-gray-100">
                       <span className="flex items-center gap-1 text-xs text-gray-400">
-                        <Calendar size={14} />
+                        <Icon name="calendar" size={14} />
                         {new Date(article.date).toLocaleDateString('en-IN')}
                       </span>
                       <Link to={`/articles/${article.slug}`} className="text-orange-600 font-semibold text-sm hover:underline">

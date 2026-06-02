@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { ArrowLeft, Calendar, Tag, User } from 'lucide-react'
+import { Icon } from '../components/ui/Icon'
 import { getArticleImage } from '../data/images'
 import { getArticleBySlug } from '../data/staticData'
 
@@ -27,7 +27,7 @@ export function ArticleDetail() {
     <article className="py-12">
       <div className="max-w-3xl mx-auto px-4">
         <Link to="/articles" className="inline-flex items-center gap-2 text-orange-600 hover:underline mb-6 text-sm">
-          <ArrowLeft size={16} /> Back to Articles
+          <Icon name="arrow-left" size={16} /> Back to Articles
         </Link>
 
         <span className="inline-block px-3 py-1 bg-orange-100 text-orange-800 text-xs font-semibold rounded-full mb-4 capitalize">
@@ -38,10 +38,10 @@ export function ArticleDetail() {
 
         <div className="flex flex-wrap items-center gap-4 text-gray-500 text-sm mb-8">
           <span className="flex items-center gap-1">
-            <User size={16} /> {article.author}
+            <Icon name="user" size={16} /> {article.author}
           </span>
           <span className="flex items-center gap-1">
-            <Calendar size={16} />
+            <Icon name="calendar" size={16} />
             {new Date(article.date).toLocaleDateString('en-IN', { dateStyle: 'long' })}
           </span>
         </div>
@@ -59,7 +59,7 @@ export function ArticleDetail() {
         <div className="flex flex-wrap gap-2 pt-6 border-t border-gray-200">
           {article.tags.map((tag) => (
             <span key={tag} className="inline-flex items-center gap-1 text-sm text-gray-600 bg-gray-100 px-3 py-1 rounded-full">
-              <Tag size={12} /> {tag}
+              <Icon name="tag" size={12} /> {tag}
             </span>
           ))}
         </div>

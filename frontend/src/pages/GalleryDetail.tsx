@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { ArrowLeft, X } from 'lucide-react'
+import { Icon } from '../components/ui/Icon'
 import { getGalleryAlbum } from '../data/staticData'
 
 export function GalleryDetail() {
@@ -24,7 +24,7 @@ export function GalleryDetail() {
       <section className="bg-gray-900 text-white py-12">
         <div className="max-w-7xl mx-auto px-4">
           <Link to="/gallery" className="inline-flex items-center gap-2 text-orange-200 hover:text-white mb-4 text-sm">
-            <ArrowLeft size={16} /> Back to Gallery
+            <Icon name="arrow-left" size={16} /> Back to Gallery
           </Link>
           <h1 className="text-3xl md:text-4xl font-bold mb-2">{album.title}</h1>
           <p className="text-gray-300">{album.description}</p>
@@ -54,7 +54,7 @@ export function GalleryDetail() {
       {lightbox !== null && (
         <div className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4" onClick={() => setLightbox(null)}>
           <button className="absolute top-4 right-4 text-white p-2" onClick={() => setLightbox(null)}>
-            <X size={28} />
+            <Icon name="x" size={28} />
           </button>
           <img
             src={album.images[lightbox].url}
