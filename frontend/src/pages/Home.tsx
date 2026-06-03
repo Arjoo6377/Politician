@@ -9,7 +9,7 @@ import { getReelEmbedUrl, ReelPlayerModal } from '../components/ui/ReelPlayerMod
 import { SectionHeading } from '../components/ui/SectionHeading'
 import { getNewsImage, images } from '../data/images'
 import { newsItems } from '../data/staticData'
-import { featuredVideos, keyHighlights, profile } from '../data/staticContent'
+import { aboutContent, featuredVideos, keyHighlights, profile } from '../data/staticContent'
 
 const quickNavItems: { label: string; path: string; icon: IconName; image: string }[] = [
   { label: 'Video Gallery', path: '/videos', icon: 'video', image: images.quickNav.gallery },
@@ -37,48 +37,52 @@ export function Home() {
 
   return (
     <>
-      <section className="relative text-white overflow-hidden min-h-[420px] md:min-h-[460px] flex items-center">
+      <section className="relative text-white overflow-hidden">
         <img src={images.heroBanner} alt="" className="absolute inset-0 w-full h-full object-cover" aria-hidden />
         <div className="absolute inset-0 bg-gradient-to-br from-orange-900/92 via-orange-800/88 to-orange-900/90" />
         <div className="absolute inset-0 opacity-20">
           <div className="absolute top-10 left-10 w-72 h-72 bg-white rounded-full blur-3xl" />
           <div className="absolute bottom-10 right-10 w-96 h-96 bg-white rounded-full blur-3xl" />
         </div>
-        <div className="relative max-w-7xl mx-auto px-4 py-12 md:py-16 w-full">
-          <div className="grid lg:grid-cols-2 gap-8 items-center">
+        <div className="relative max-w-7xl mx-auto px-4 py-10 sm:py-12 md:py-16 w-full">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-10 items-start">
             <div className="min-w-0">
               <div className="grid grid-cols-[minmax(0,1fr)_clamp(7.5rem,32vw,10.5rem)] gap-x-3 sm:gap-x-4 items-start lg:block">
                 <p className="text-orange-100 font-medium mb-2 text-sm sm:text-base col-start-1 row-start-1">
                   {profile.party}
                 </p>
-                <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight col-start-1 row-start-2 mb-0 lg:mb-3">
+                <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight col-start-1 row-start-2 mb-0 lg:mb-2">
                   {profile.name}
                 </h1>
 
-                <div className="col-start-2 row-start-1 row-span-4 flex items-center justify-center lg:hidden">
+                <div className="col-start-2 row-start-1 row-span-5 flex items-center justify-center lg:hidden">
                   <ProfileImage bordered className="!w-32 !h-32 sm:!w-36 sm:!h-36 md:!w-40 md:!h-40" />
                 </div>
 
                 <p className="text-lg sm:text-xl md:text-2xl text-orange-100 mb-1 mt-3 col-start-1 row-start-3 lg:mt-0">
                   {profile.designation}
                 </p>
-                <p className="text-base sm:text-lg text-orange-50 mb-4 sm:mb-5 col-start-1 row-start-4">
+                <p className="text-base sm:text-lg text-orange-50 mb-3 sm:mb-4 col-start-1 row-start-4">
                   {profile.constituency}
                 </p>
-                <p className="text-base sm:text-lg leading-relaxed mb-6 max-w-xl col-start-1 row-start-5 lg:row-auto">
-                  {profile.intro}
+                <p className="text-base sm:text-lg font-semibold text-orange-100 mb-3 col-start-1 row-start-5 lg:row-auto italic">
+                  &ldquo;{profile.tagline}&rdquo;
                 </p>
-                <div className="flex flex-wrap gap-3 sm:gap-4 col-start-1 row-start-6 col-span-2 lg:col-span-1 lg:row-auto">
-                  <Button to="/about" variant="secondary" size="lg">
-                    Know More <Icon name="arrow-right" size={18} />
+                <div className="space-y-3 sm:space-y-4 text-sm sm:text-base md:text-lg leading-relaxed text-orange-50/95 col-start-1 row-start-6 col-span-2 lg:col-span-1 lg:row-auto mb-6">
+                  <p>{aboutContent.introduction}</p>
+                  <p>{aboutContent.politicalBackground}</p>
+                </div>
+                <div className="flex flex-wrap gap-3 sm:gap-4 col-start-1 row-start-7 col-span-2 lg:col-span-1 lg:row-auto">
+                  <Button to="/contact" variant="secondary" size="lg">
+                    Contact Us <Icon name="arrow-right" size={18} />
                   </Button>
-                  <Button to="/contact" variant="outline" size="lg" className="border-white text-white hover:bg-white/10">
-                    Contact Us
+                  <Button to="/media" variant="outline" size="lg" className="border-white text-white hover:bg-white/10">
+                    Media Coverage
                   </Button>
                 </div>
               </div>
             </div>
-            <div className="hidden lg:flex justify-center">
+            <div className="hidden lg:flex justify-center lg:sticky lg:top-24">
               <ProfileImage size="lg" bordered />
             </div>
           </div>
