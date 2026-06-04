@@ -54,13 +54,11 @@ export function Header() {
             </div>
           </Link>
 
-          {/* Desktop nav */}
           <nav className="hidden lg:flex items-center gap-1">
             <NavLink to="/" end className={({ isActive }) => linkClass(isActive)}>
               Home
             </NavLink>
 
-            {/* Media dropdown — after Home */}
             <div ref={dropdownRef} className="relative">
               <button
                 type="button"
@@ -120,7 +118,6 @@ export function Header() {
           </button>
         </div>
 
-        {/* Mobile nav */}
         {mobileOpen && (
           <nav className="lg:hidden pb-4 border-t border-gray-100">
             <div className="pt-3 space-y-1">

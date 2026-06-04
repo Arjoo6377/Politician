@@ -1,64 +1,104 @@
+import { useState } from 'react'
 import { Card } from '../components/ui/Card'
-import { Icon, type IconName } from '../components/ui/Icon'
+import { Icon } from '../components/ui/Icon'
 import { PageHero } from '../components/ui/PageHero'
 import { SectionHeading } from '../components/ui/SectionHeading'
+import {
+  getYouTubeEmbedUrl,
+  getYouTubeVideoId,
+  ReelPlayerModal,
+} from '../components/ui/ReelPlayerModal'
 import { images } from '../data/images'
-import { mediaCoverage } from '../data/staticContent'
+import {
+  featuredChannels,
+  mediaCoverageFooter,
+  mediaCoverageIntro,
+} from '../data/staticContent'
 
-const typeIcons: Record<string, IconName> = {
-  'News Coverage': 'newspaper',
-  'TV Debate': 'tv',
-  Interview: 'mic',
-  'Press Mention': 'radio',
-  'Media Highlight': 'radio',
-}
+type FeaturedChannel = (typeof featuredChannels)[number]
 
 export function MediaCoveragePage() {
+  const [playingChannel, setPlayingChannel] = useState<FeaturedChannel | null>(null)
+
   return (
     <>
       <PageHero
         title="Media Coverage"
-        subtitle="Featured news appearances, television discussions, interviews, and media mentions"
+        subtitle={mediaCoverageIntro}
         image={images.mediaBanner}
       />
 
       <section className="py-16 md:py-20">
         <div className="max-w-7xl mx-auto px-4">
-          <SectionHeading title="Media Presence" subtitle="Public appearances and media highlights" />
+          <SectionHeading title="Featured Channels" />
 
-          <div className="space-y-6">
-            {mediaCoverage.map((item) => (
-              <Card key={item.title} className="!p-0 overflow-hidden">
-                <div className="flex flex-col md:flex-row">
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="md:w-72 lg:w-80 h-48 md:h-auto object-cover shrink-0"
-                  />
-                  <div className="p-6 flex-1">
-                    <div className="flex items-start gap-4 mb-3">
-                      <div className="shrink-0 w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center">
-                        <Icon name={typeIcons[item.type] ?? 'newspaper'} className="text-orange-700" size={24} />
-                      </div>
-                      <div className="flex flex-wrap items-center gap-3">
-                        <span className="text-xs font-semibold px-3 py-1 bg-orange-100 text-orange-800 rounded-full">
-                          {item.type}
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {featuredChannels.map((channel) => {
+              const videoId = channel.videoUrl ? getYouTubeVideoId(channel.videoUrl) : undefined
+              const hasVideo = Boolean(videoId)
+
+              return (
+                <Card key={channel.name} className="flex flex-col h-full overflow-hidden !p-0">
+                  {hasVideo ? (
+                    <button
+                      type="button"
+                      onClick={() => setPlayingChannel(channel)}
+                      className="relative block w-full aspect-video overflow-hidden group"
+                      aria-label={`Watch ${channel.name} video`}
+                    >
+                      <img
+                        src={`https://img.youtube.com/vi/${videoId}/hqdefault.jpg`}
+                        alt=""
+                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      />
+                      <span className="absolute inset-0 bg-black/25 group-hover:bg-black/35 transition-colors" />
+                      <span className="absolute inset-0 flex items-center justify-center">
+                        <span className="w-14 h-14 rounded-full bg-orange-600 text-white flex items-center justify-center shadow-lg group-hover:bg-orange-500 transition-colors">
+                          <Icon name="play" size={28} className="ml-1" />
                         </span>
-                        <span className="text-sm text-gray-500">{item.outlet}</span>
-                        <span className="text-sm text-gray-400">
-                          {new Date(item.date).toLocaleDateString('en-IN')}
-                        </span>
+                      </span>
+                    </button>
+                  ) : (
+                    <div className="aspect-video bg-gradient-to-br from-orange-50 to-orange-100 flex items-center justify-center">
+                      <div className="w-16 h-16 rounded-2xl bg-white shadow-sm flex items-center justify-center">
+                        <Icon name="tv" className="text-orange-700" size={32} />
                       </div>
                     </div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">{item.title}</h3>
-                    <p className="text-gray-600">{item.excerpt}</p>
+                  )}
+
+                  <div className="p-6 flex flex-col flex-1">
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">{channel.name}</h3>
+                    <p className="text-gray-600 flex-1">{channel.description}</p>
+                    {hasVideo ? (
+                      <button
+                        type="button"
+                        onClick={() => setPlayingChannel(channel)}
+                        className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-orange-700 hover:text-orange-600"
+                      >
+                        <Icon name="play" size={18} />
+                        Watch Video
+                      </button>
+                    ) : null}
                   </div>
-                </div>
-              </Card>
-            ))}
+                </Card>
+              )
+            })}
           </div>
+
+          <p className="mt-12 text-center text-gray-600 text-lg max-w-3xl mx-auto">
+            {mediaCoverageFooter}
+          </p>
         </div>
       </section>
+
+      {playingChannel?.videoUrl && (
+        <ReelPlayerModal
+          embedUrl={getYouTubeEmbedUrl(playingChannel.videoUrl)}
+          title={playingChannel.name}
+          variant="youtube"
+          onClose={() => setPlayingChannel(null)}
+        />
+      )}
     </>
   )
 }

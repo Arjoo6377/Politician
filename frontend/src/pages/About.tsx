@@ -27,7 +27,7 @@ const focusAreas = [
   {
     icon: 'eye' as IconName,
     title: 'Vision — Viksit Bharat',
-    image: images.highlights.healthcare,
+    image: images.highlights.vision,
     description: aboutContent.vision,
   },
 ]

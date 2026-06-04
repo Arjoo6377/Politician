@@ -7,15 +7,13 @@ import { Button } from '../components/ui/Button'
 import { Card } from '../components/ui/Card'
 import { getReelEmbedUrl, ReelPlayerModal } from '../components/ui/ReelPlayerModal'
 import { SectionHeading } from '../components/ui/SectionHeading'
-import { getNewsImage, images } from '../data/images'
-import { newsItems } from '../data/staticData'
+import { images } from '../data/images'
 import { aboutContent, featuredVideos, keyHighlights, profile } from '../data/staticContent'
 
 const quickNavItems: { label: string; path: string; icon: IconName; image: string }[] = [
-  { label: 'Video Gallery', path: '/videos', icon: 'video', image: images.quickNav.gallery },
-  { label: 'Photo Gallery', path: '/gallery', icon: 'image', image: images.quickNav.publicWork },
+  { label: 'Video Gallery', path: '/videos', icon: 'video', image: images.quickNav.videos },
+  { label: 'Photo Gallery', path: '/gallery', icon: 'image', image: images.quickNav.gallery },
   { label: 'Media Coverage', path: '/media', icon: 'newspaper', image: images.quickNav.media },
-  { label: 'Announcements', path: '/news', icon: 'megaphone', image: images.quickNav.news },
 ]
 
 const videoCategoryLabels: Record<string, string> = {
@@ -23,8 +21,6 @@ const videoCategoryLabels: Record<string, string> = {
   interview: 'Interviews',
   'public-speech': 'Public Speeches',
 }
-
-const latestNews = newsItems.slice(0, 3)
 
 export function Home() {
   const [activeHomeVideo, setActiveHomeVideo] = useState(featuredVideos[0])
@@ -89,22 +85,28 @@ export function Home() {
         </div>
       </section>
 
-      <section className="bg-white border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 py-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <section className="bg-gray-50 border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 py-6 md:py-8">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
             {quickNavItems.map((item) => (
               <Link
                 key={item.path}
                 to={item.path}
-                className="group relative rounded-xl overflow-hidden border border-gray-200 hover:border-orange-300 hover:shadow-md transition-all aspect-[4/3]"
+                className="group relative block min-h-[200px] sm:min-h-[220px] rounded-2xl overflow-hidden border border-gray-200 bg-gray-200 shadow-sm hover:border-orange-400 hover:shadow-lg transition-all duration-300"
               >
-                <img src={item.image} alt={item.label} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-3 flex items-center gap-2">
-                  <div className="p-1.5 bg-white/20 backdrop-blur rounded-lg">
-                    <Icon name={item.icon} size={16} className="text-white" />
+                <img
+                  src={item.image}
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                  className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-black/10" />
+                <div className="absolute bottom-0 left-0 right-0 p-4 md:p-5 flex items-center gap-3">
+                  <div className="shrink-0 p-2.5 bg-orange-600/90 rounded-xl shadow-md">
+                    <Icon name={item.icon} size={20} className="text-white" />
                   </div>
-                  <span className="font-semibold text-white text-sm">{item.label}</span>
+                  <span className="font-bold text-white text-base md:text-lg drop-shadow-sm">{item.label}</span>
                 </div>
               </Link>
             ))}
@@ -115,13 +117,21 @@ export function Home() {
       <section className="py-8 md:py-10">
         <div className="max-w-7xl mx-auto px-4">
           <SectionHeading compact title="Key Highlights" subtitle="Leadership, communication, and nation-building" />
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
             {keyHighlights.map((item) => (
-              <Card key={item.title} className="!p-0 overflow-hidden">
-                <img src={item.image} alt={item.title} className="w-full h-40 object-cover" />
-                <div className="p-5">
-                  <h3 className="text-lg font-bold text-gray-900 mb-2">{item.title}</h3>
-                  <p className="text-gray-600 text-sm">{item.description}</p>
+              <Card key={item.title} className="!p-0 overflow-hidden h-full flex flex-col">
+                <div className="relative aspect-[4/3] bg-gray-100 overflow-hidden">
+                  <img
+                    src={item.image}
+                    alt=""
+                    loading="lazy"
+                    className="w-full h-full object-cover object-center"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+                </div>
+                <div className="p-5 flex-1 flex flex-col">
+                  <h3 className="text-lg font-bold text-gray-900 mb-2 leading-snug">{item.title}</h3>
+                  <p className="text-gray-600 text-sm leading-relaxed flex-1">{item.description}</p>
                 </div>
               </Card>
             ))}
@@ -193,41 +203,6 @@ export function Home() {
           </div>
           <div className="text-center mt-6">
             <Button to="/videos" variant="outline">View All Videos</Button>
-          </div>
-        </div>
-      </section>
-
-      <section className="pt-4 pb-10 md:pt-6 md:pb-12 bg-white">
-        <div className="max-w-7xl mx-auto px-4">
-          <SectionHeading compact title="Announcements" subtitle="Latest updates, official statements, and important notices" />
-          {latestNews.length === 0 ? (
-            <p className="text-center text-gray-500">No announcements yet. Check back soon.</p>
-          ) : (
-            <div className="grid md:grid-cols-3 gap-6">
-              {latestNews.map((item) => (
-                <Card key={item.id} className="!p-0 overflow-hidden">
-                  <img
-                    src={getNewsImage(item.category, item.image)}
-                    alt={item.title}
-                    className="w-full h-48 object-cover"
-                  />
-                  <div className="p-6">
-                    <span className="inline-block px-3 py-1 bg-orange-100 text-orange-700 text-xs font-semibold rounded-full mb-3 capitalize">
-                      {item.category.replace('-', ' ')}
-                    </span>
-                    <h3 className="text-lg font-bold text-gray-900 mb-2">{item.title}</h3>
-                    <p className="text-gray-600 text-sm mb-3 line-clamp-2">{item.excerpt}</p>
-                    <p className="text-xs text-gray-400 mb-4">{new Date(item.date).toLocaleDateString('en-IN')}</p>
-                    <Link to={`/news/${item.id}`} className="text-orange-600 font-semibold text-sm hover:underline">
-                      Read More →
-                    </Link>
-                  </div>
-                </Card>
-              ))}
-            </div>
-          )}
-          <div className="text-center mt-6">
-            <Button to="/news" variant="outline">All Announcements</Button>
           </div>
         </div>
       </section>

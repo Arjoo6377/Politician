@@ -30,11 +30,8 @@ export const mediaDropdown = [
   { label: 'Media Coverage', path: '/media' },
   { label: 'Photo Gallery', path: '/gallery' },
   { label: 'Video Gallery', path: '/videos' },
-  { label: 'Announcements', path: '/news' },
-  { label: 'Articles & Blogs', path: '/articles' },
 ]
 
-/** All links — used in footer */
 export const navLinks = [
   ...mainNavLinks.filter((l) => l.path !== '/'),
   ...mediaDropdown,
@@ -56,27 +53,26 @@ export const aboutContent = {
 export const keyHighlights = [
   {
     title: 'National Spokesperson',
-    image: images.highlights.roads,
+    image: images.highlights.spokesperson,
     description: 'Bharatiya Janata Party (BJP) — the trusted voice of the party on national and regional platforms.',
   },
   {
     title: 'Political Communication & Public Engagement',
-    image: images.highlights.healthcare,
+    image: images.highlights.communication,
     description: 'Effectively communicating policy perspectives and engaging citizens in meaningful political discourse.',
   },
   {
     title: 'Media Representation & Public Affairs',
-    image: images.highlights.youth,
+    image: images.highlights.media,
     description: 'Representing the BJP across television debates, interviews, press conferences, and media interactions.',
   },
   {
     title: 'Leadership & Nation Building Initiatives',
-    image: images.publicWork.health,
+    image: images.highlights.leadership,
     description: 'Contributing to the mission of Viksit Bharat through leadership, governance advocacy, and public service.',
   },
 ]
 
-/** @deprecated Use keyHighlights — kept for backward compatibility */
 export const homeHighlights = keyHighlights
 
 export const publicWork = keyHighlights.map((item) => ({
@@ -87,56 +83,34 @@ export const publicWork = keyHighlights.map((item) => ({
   impact: 'BJP · Viksit Bharat',
 }))
 
-export const mediaCoverage = [
+export const mediaCoverageIntro =
+  'Featured appearances across leading news and media platforms, showcasing political discussions, public engagement, interviews, and national conversations.'
+
+export const featuredChannels = [
   {
-    title: 'National Debate on Economic Policy & Viksit Bharat',
-    outlet: 'Times Now',
-    type: 'TV Debate',
-    date: '2026-04-10',
-    image: images.media.debate,
-    excerpt: 'Participated in a prime-time debate on economic reforms, inclusive growth, and the roadmap towards a developed India.',
+    name: 'AVP News',
+    description: 'Political discussions, current affairs analysis, and media appearances.',
+    videoUrl: 'https://youtu.be/GY-0ODTVZds',
   },
   {
-    title: 'Exclusive Interview: BJP\'s Vision for 2026',
-    outlet: 'India Today',
-    type: 'Interview',
-    date: '2026-03-22',
-    image: images.media.interview,
-    excerpt: 'In-depth discussion on the party\'s policy agenda, governance priorities, and communication strategy for national development.',
+    name: 'Zee News',
+    description: 'Television debates and public policy conversations.',
+    videoUrl: 'https://youtu.be/X8jQ1Oyr7i4',
   },
   {
-    title: 'Press Conference on Government Initiatives',
-    outlet: 'PTI',
-    type: 'Press Mention',
-    date: '2026-02-15',
-    image: images.media.press,
-    excerpt: 'Addressed media on key government welfare schemes, digital governance, and public outreach programs.',
+    name: 'News India',
+    description: 'Media interaction and public discourse coverage.',
+    videoUrl: 'https://youtu.be/CVWgJySqM-Y',
   },
   {
-    title: 'Panel Discussion on National Security',
-    outlet: 'Republic Bharat',
-    type: 'TV Debate',
-    date: '2026-01-28',
-    image: images.media.news1,
-    excerpt: 'Shared perspectives on national security, border policy, and India\'s role in regional stability.',
-  },
-  {
-    title: 'Feature: Voice of the BJP on National Media',
-    outlet: 'The Hindu',
-    type: 'News Coverage',
-    date: '2025-12-05',
-    image: images.media.village,
-    excerpt: 'Profile feature on Rajeev Jaitly\'s role as National Spokesperson and his contribution to political communication.',
-  },
-  {
-    title: 'Debate on Education & Skill Development',
-    outlet: 'ABP News',
-    type: 'TV Debate',
-    date: '2025-11-18',
-    image: images.media.education,
-    excerpt: 'Discussed NEP implementation, youth skill development, and employment generation strategies.',
+    name: 'Zee Salaam',
+    description: 'Public affairs discussions and media engagement.',
+    videoUrl: 'https://youtu.be/f6jSgt5fnQk',
   },
 ]
+
+export const mediaCoverageFooter =
+  'Stay updated with the latest television appearances, debates, interviews, and media interactions.'
 
 export const videos = [
   {

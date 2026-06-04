@@ -41,7 +41,6 @@ function auth(req, res, next) {
   next()
 }
 
-// Auth
 app.post('/api/auth/login', (req, res) => {
   if (req.body.password === ADMIN_PASSWORD) {
     return res.json({ token: ADMIN_TOKEN })
@@ -49,77 +48,6 @@ app.post('/api/auth/login', (req, res) => {
   res.status(401).json({ error: 'Invalid password' })
 })
 
-// News
-app.get('/api/news', (_req, res) => {
-  const news = readData('news.json').sort((a, b) => new Date(b.date) - new Date(a.date))
-  res.json(news)
-})
-
-app.get('/api/news/:id', (req, res) => {
-  const item = readData('news.json').find((n) => n.id === req.params.id)
-  if (!item) return res.status(404).json({ error: 'Not found' })
-  res.json(item)
-})
-
-app.post('/api/news', auth, (req, res) => {
-  const news = readData('news.json')
-  const item = { id: uuidv4(), ...req.body }
-  news.unshift(item)
-  writeData('news.json', news)
-  res.status(201).json(item)
-})
-
-app.put('/api/news/:id', auth, (req, res) => {
-  const news = readData('news.json')
-  const idx = news.findIndex((n) => n.id === req.params.id)
-  if (idx === -1) return res.status(404).json({ error: 'Not found' })
-  news[idx] = { ...news[idx], ...req.body }
-  writeData('news.json', news)
-  res.json(news[idx])
-})
-
-app.delete('/api/news/:id', auth, (req, res) => {
-  const news = readData('news.json').filter((n) => n.id !== req.params.id)
-  writeData('news.json', news)
-  res.status(204).end()
-})
-
-// Articles
-app.get('/api/articles', (_req, res) => {
-  const articles = readData('articles.json').sort((a, b) => new Date(b.date) - new Date(a.date))
-  res.json(articles)
-})
-
-app.get('/api/articles/:slug', (req, res) => {
-  const item = readData('articles.json').find((a) => a.slug === req.params.slug)
-  if (!item) return res.status(404).json({ error: 'Not found' })
-  res.json(item)
-})
-
-app.post('/api/articles', auth, (req, res) => {
-  const articles = readData('articles.json')
-  const item = { id: uuidv4(), ...req.body }
-  articles.unshift(item)
-  writeData('articles.json', articles)
-  res.status(201).json(item)
-})
-
-app.put('/api/articles/:id', auth, (req, res) => {
-  const articles = readData('articles.json')
-  const idx = articles.findIndex((a) => a.id === req.params.id)
-  if (idx === -1) return res.status(404).json({ error: 'Not found' })
-  articles[idx] = { ...articles[idx], ...req.body }
-  writeData('articles.json', articles)
-  res.json(articles[idx])
-})
-
-app.delete('/api/articles/:id', auth, (req, res) => {
-  const articles = readData('articles.json').filter((a) => a.id !== req.params.id)
-  writeData('articles.json', articles)
-  res.status(204).end()
-})
-
-// Gallery
 app.get('/api/gallery', (_req, res) => {
   const gallery = readData('gallery.json').sort((a, b) => new Date(b.date) - new Date(a.date))
   res.json(gallery)
@@ -154,7 +82,6 @@ app.delete('/api/gallery/:id', auth, (req, res) => {
   res.status(204).end()
 })
 
-// Upload
 app.post('/api/upload', auth, upload.single('image'), (req, res) => {
   if (!req.file) return res.status(400).json({ error: 'No file uploaded' })
   res.json({ url: `/uploads/${req.file.filename}` })

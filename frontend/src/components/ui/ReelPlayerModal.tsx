@@ -5,6 +5,7 @@ interface ReelPlayerModalProps {
   embedUrl: string
   title: string
   onClose: () => void
+  variant?: 'reel' | 'youtube'
 }
 
 export function getReelEmbedUrl(url: string) {
@@ -12,7 +13,17 @@ export function getReelEmbedUrl(url: string) {
   return `${base}${base.includes('?') ? '&' : '?'}autoplay=1`
 }
 
-export function ReelPlayerModal({ embedUrl, title, onClose }: ReelPlayerModalProps) {
+export function getYouTubeVideoId(url: string) {
+  return url.match(/(?:youtu\.be\/|v=)([\w-]+)/)?.[1]
+}
+
+export function getYouTubeEmbedUrl(url: string) {
+  const id = getYouTubeVideoId(url)
+  if (!id) return url
+  return `https://www.youtube.com/embed/${id}?autoplay=1`
+}
+
+export function ReelPlayerModal({ embedUrl, title, onClose, variant = 'reel' }: ReelPlayerModalProps) {
   useEffect(() => {
     document.body.style.overflow = 'hidden'
     return () => {
@@ -36,7 +47,10 @@ export function ReelPlayerModal({ embedUrl, title, onClose }: ReelPlayerModalPro
       aria-modal="true"
       aria-label="Video player"
     >
-      <div className="relative w-full max-w-[min(100%,400px)]" onClick={(e) => e.stopPropagation()}>
+      <div
+        className={`relative w-full ${variant === 'youtube' ? 'max-w-[min(100%,900px)]' : 'max-w-[min(100%,400px)]'}`}
+        onClick={(e) => e.stopPropagation()}
+      >
         <button
           type="button"
           onClick={onClose}
@@ -45,11 +59,11 @@ export function ReelPlayerModal({ embedUrl, title, onClose }: ReelPlayerModalPro
         >
           <Icon name="x" size={28} />
         </button>
-        <div className="reel-modal-shell">
+        <div className={variant === 'youtube' ? 'youtube-modal-shell' : 'reel-modal-shell'}>
           <iframe
             src={embedUrl}
             title={title}
-            className="reel-modal-iframe"
+            className={variant === 'youtube' ? 'youtube-modal-iframe' : 'reel-modal-iframe'}
             allow="autoplay; encrypted-media; picture-in-picture; web-share"
             allowFullScreen
           />
