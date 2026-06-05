@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Icon, type IconName } from '../components/ui/Icon'
-import { InstagramIcon } from '../components/ui/SocialIcons'
+import { FacebookIcon, InstagramIcon, LinkedInIcon, TwitterIcon } from '../components/ui/SocialIcons'
 import { ProfileImage } from '../components/ui/ProfileImage'
 import { Button } from '../components/ui/Button'
 import { Card } from '../components/ui/Card'
@@ -27,7 +27,10 @@ export function Home() {
   const [playingHomeVideo, setPlayingHomeVideo] = useState<(typeof featuredVideos)[number] | null>(null)
 
   const socialLinks = [
+    { icon: FacebookIcon, href: profile.social.facebook, label: 'Facebook', handle: '' },
+    { icon: TwitterIcon, href: profile.social.twitter, label: 'X (Twitter)', handle: '@RajeevJaitly' },
     { icon: InstagramIcon, href: profile.social.instagram, label: 'Instagram', handle: '@rajeevjaitly' },
+    { icon: LinkedInIcon, href: profile.social.linkedin, label: 'LinkedIn', handle: '' },
   ].filter((s) => s.href)
   const getPreviewEmbedUrl = (url: string) => `${url.replace(/\/$/, '')}/embed`
 

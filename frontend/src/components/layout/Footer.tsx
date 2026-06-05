@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { Icon } from '../ui/Icon'
-import { FacebookIcon, InstagramIcon, YoutubeIcon } from '../ui/SocialIcons'
+import { FacebookIcon, InstagramIcon, LinkedInIcon, TwitterIcon, YoutubeIcon } from '../ui/SocialIcons'
 import { navLinks, profile } from '../../data/staticContent'
 
 export function Footer() {
@@ -47,15 +47,25 @@ export function Footer() {
 
           <div>
             <h4 className="text-white font-semibold mb-4">Follow Us</h4>
-            <div className="flex gap-3">
+            <div className="flex flex-wrap gap-3">
               {profile.social.facebook && (
                 <a href={profile.social.facebook} target="_blank" rel="noopener noreferrer" className="p-2 bg-gray-800 rounded-lg hover:bg-orange-600 transition-colors" aria-label="Facebook">
                   <FacebookIcon size={20} />
                 </a>
               )}
+              {profile.social.twitter && (
+                <a href={profile.social.twitter} target="_blank" rel="noopener noreferrer" className="p-2 bg-gray-800 rounded-lg hover:bg-orange-600 transition-colors" aria-label="X (Twitter)">
+                  <TwitterIcon size={20} />
+                </a>
+              )}
               {profile.social.instagram && (
                 <a href={profile.social.instagram} target="_blank" rel="noopener noreferrer" className="p-2 bg-gray-800 rounded-lg hover:bg-orange-600 transition-colors" aria-label="Instagram">
                   <InstagramIcon size={20} />
+                </a>
+              )}
+              {profile.social.linkedin && (
+                <a href={profile.social.linkedin} target="_blank" rel="noopener noreferrer" className="p-2 bg-gray-800 rounded-lg hover:bg-orange-600 transition-colors" aria-label="LinkedIn">
+                  <LinkedInIcon size={20} />
                 </a>
               )}
               {profile.social.youtube && (

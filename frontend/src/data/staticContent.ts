@@ -13,10 +13,11 @@ export const profile = {
   phone: '',
   address: '365, Indira Enclave, Sector-21D, Faridabad, Haryana – 121012',
   social: {
-    facebook: '',
-    twitter: '',
+    facebook: 'https://www.facebook.com/share/1BJiaQktuu/',
+    twitter: 'https://x.com/RajeevJaitly',
     instagram: 'https://instagram.com/rajeevjaitly',
     youtube: '',
+    linkedin: 'https://in.linkedin.com/in/rajeevjaitlybjp',
   },
 }
 
