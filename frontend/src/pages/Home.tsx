@@ -120,7 +120,7 @@ export function Home() {
       <section className="py-8 md:py-10">
         <div className="max-w-7xl mx-auto px-4">
           <SectionHeading compact title="Key Highlights" subtitle="Leadership, communication, and nation-building" />
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
+          <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
             {keyHighlights.map((item) => (
               <Card key={item.title} className="!p-0 overflow-hidden h-full flex flex-col">
                 <div className="relative aspect-[4/3] bg-gray-100 overflow-hidden">
@@ -218,19 +218,19 @@ export function Home() {
             title="Connect With Us"
             subtitle="Follow on social media for daily updates and public messages"
           />
-          <div className="flex justify-center gap-4">
+          <div className="flex flex-wrap justify-center gap-3">
             {socialLinks.map((social) => (
               <a
                 key={social.label}
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex flex-col items-center gap-1.5 px-5 py-3 rounded-xl bg-white/10 hover:bg-white/20 transition-colors"
+                className="flex flex-col items-center gap-1.5 px-3 sm:px-5 py-3 rounded-xl bg-white/10 hover:bg-white/20 transition-colors min-w-[72px]"
               >
-                <social.icon size={24} />
-                <span className="text-sm font-medium">{social.label}</span>
+                <social.icon size={22} />
+                <span className="text-xs sm:text-sm font-medium leading-tight text-center">{social.label}</span>
                 {'handle' in social && social.handle && (
-                  <span className="text-xs text-orange-100">{social.handle}</span>
+                  <span className="text-[10px] sm:text-xs text-orange-100">{social.handle}</span>
                 )}
               </a>
             ))}
